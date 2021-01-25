@@ -24,6 +24,8 @@ public class RobotContainer {
   private final Joystick m_leftJoy = new Joystick(Constants.Controls.kLeftJoy);
   private final Joystick m_rightJoy = new Joystick(Constants.Controls.kRightJoy);
 
+  private final XboxController m_systemsController = new XboxController(Constants.Controls.kSystemsController);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings

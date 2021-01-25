@@ -27,5 +27,6 @@ public final class Constants {
     public class Controls {
         public static final int kLeftJoy = 2;
         public static final int kRightJoy = 1;
+        public static final int kSystemsController = 0;
     }
 }
