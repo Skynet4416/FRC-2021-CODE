@@ -8,8 +8,11 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveByJoy;
+import frc.robot.commands.IntakeContinously;
 import frc.robot.subsystems.ChassisSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -21,11 +24,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ChassisSubsystem m_chassis = new ChassisSubsystem();
+  private final IntakeSubsystem m_intake = new IntakeSubsystem();
 
   private final Joystick m_leftJoy = new Joystick(Constants.Controls.kLeftJoy);
   private final Joystick m_rightJoy = new Joystick(Constants.Controls.kRightJoy);
 
   private final XboxController m_systemsController = new XboxController(Constants.Controls.kSystemsController);
+  private final JoystickButton m_intake_button = new JoystickButton(m_systemsController,
+      XboxController.Button.kA.value);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -45,6 +51,7 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    this.m_intake_button.whileHeld(new IntakeContinously(this.m_intake));
   }
 
   /**
