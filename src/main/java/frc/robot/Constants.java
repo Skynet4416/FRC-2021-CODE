@@ -41,5 +41,12 @@ public final class Constants {
             public static final double kF = 0;
             public static final double kIZone = 0;
         }
+
+        public class SmartDashboard {
+            public static final String ShooterKP = "Shooter kP";
+            public static final String ShooterKI = "Shooter kI";
+            public static final String ShooterKD = "Shooter kD";
+            public static final String ShooterKF = "Shooter kF";
+        }
     }
 }

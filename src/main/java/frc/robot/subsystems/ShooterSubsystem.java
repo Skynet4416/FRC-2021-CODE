@@ -1,12 +1,15 @@
 package frc.robot.subsystems;
 
+import frc.robot.Constants.Shooter;
+
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.Shooter;
 
 /**
  * Shooter PID subsystem.
@@ -40,5 +43,36 @@ public class ShooterSubsystem extends SubsystemBase {
         m_pidController.setFF(Shooter.PID.kF);
         m_pidController.setIZone(Shooter.PID.kIZone);
         m_pidController.setOutputRange(0, 1);
-    }//peepee
+
+        // Set 
+        SmartDashboard.putNumber(Shooter.SmartDashboard.ShooterKP, Shooter.PID.kP);
+        SmartDashboard.putNumber(Shooter.SmartDashboard.ShooterKI, Shooter.PID.kI);
+        SmartDashboard.putNumber(Shooter.SmartDashboard.ShooterKD, Shooter.PID.kD);
+        SmartDashboard.putNumber(Shooter.SmartDashboard.ShooterKF, Shooter.PID.kF);
+    }
+
+    @Override
+    public void periodic() {
+        m_pidController.setP(SmartDashboard.getNumber(Shooter.SmartDashboard.ShooterKP, Shooter.PID.kP));
+        m_pidController.setI(SmartDashboard.getNumber(Shooter.SmartDashboard.ShooterKI, Shooter.PID.kI));
+        m_pidController.setD(SmartDashboard.getNumber(Shooter.SmartDashboard.ShooterKD, Shooter.PID.kD));
+        m_pidController.setFF(SmartDashboard.getNumber(Shooter.SmartDashboard.ShooterKF, Shooter.PID.kF));
+        
+        SmartDashboard.putNumber("Shooter Output", m_shooterMaster.getAppliedOutput());
+        SmartDashboard.putNumber("Shooter Velocity (RPM)", m_encoder.getVelocity());
+    }
+    /**
+     * set power by rpm
+     * @param rpm
+     */
+    public void setPID(double rpm) {
+        m_pidController.setReference(rpm, ControlType.kVelocity);
+    }
+    /**
+     * set power by speed
+     * @param speed
+     */
+    public void setManual(double speed) {
+        m_pidController.setReference(speed, ControlType.kDutyCycle);
+    }
 }
