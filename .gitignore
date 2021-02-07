@@ -24,6 +24,7 @@ hs_err_pid*
 
 .gradle/
 build/
+<<<<<<< HEAD
 
 
 .settings/
@@ -105,3 +106,6 @@ local.properties
 .sts4-cache/
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse
+=======
+*.prefs
+>>>>>>> test
