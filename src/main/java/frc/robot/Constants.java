@@ -24,6 +24,13 @@ public final class Constants {
         }
     }
 
+    public class Intake {
+        public class Motors {
+            public static final int kDeploy = -1;
+            public static final int kIntake = -1;
+        }
+    }
+
     public class Controls {
         public static final int kLeftJoy = 2;
         public static final int kRightJoy = 1;
