@@ -29,6 +29,10 @@ public final class Constants {
             public static final int kDeploy = -1;
             public static final int kIntake = -1;
         }
+
+        public class IntakeContinously {
+            public static final double kSpeed = -1;
+        }
     }
 
     public class Controls {
