@@ -12,7 +12,7 @@ public class ClimbSubsystem extends SubsystemBase {
     private VictorSPX kRight = new VictorSPX(Constants.Climb.kRight);
     private VictorSPX kLeft = new VictorSPX(Constants.Climb.kLeft);
     DigitalInput kHallEffect = new DigitalInput(Constants.Climb.kHallEffect);
-    
+
     /**
      * Set climb right motor output.
      * 
@@ -40,10 +40,11 @@ public class ClimbSubsystem extends SubsystemBase {
 
         this.kLeft.set(ControlMode.PercentOutput, left);
     }
+
     /**
      * @return hall effect status
      */
-    public boolean getHallEffectStatus(){
+    public boolean getHallEffectStatus() {
         return kHallEffect.get();
     }
 }

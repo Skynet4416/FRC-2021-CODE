@@ -9,7 +9,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveByJoy;
 import frc.robot.commands.IntakeContinously;
+import frc.robot.commands.LowerClimb;
 import frc.robot.subsystems.ChassisSubsystem;
+import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -25,6 +27,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ChassisSubsystem m_chassis = new ChassisSubsystem();
   private final IntakeSubsystem m_intake = new IntakeSubsystem();
+  private final ClimbSubsystem m_climb = new ClimbSubsystem();
 
   private final Joystick m_leftJoy = new Joystick(Constants.Controls.kLeftJoy);
   private final Joystick m_rightJoy = new Joystick(Constants.Controls.kRightJoy);
@@ -32,6 +35,11 @@ public class RobotContainer {
   private final XboxController m_systemsController = new XboxController(Constants.Controls.kSystemsController);
   private final JoystickButton m_intake_button = new JoystickButton(m_systemsController,
       XboxController.Button.kA.value);
+
+  private final JoystickButton m_lower_left_arm = new JoystickButton(m_systemsController,
+      XboxController.Button.kBumperLeft.value);
+  private final JoystickButton m_lower_right_arm = new JoystickButton(m_systemsController,
+      XboxController.Button.kBumperRight.value);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -52,6 +60,9 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     this.m_intake_button.whileHeld(new IntakeContinously(this.m_intake));
+    this.m_lower_left_arm.whileHeld(new LowerClimb(this.m_climb, false, true));
+    this.m_lower_right_arm.whileHeld(new LowerClimb(this.m_climb, true, false));
+
   }
 
   /**
