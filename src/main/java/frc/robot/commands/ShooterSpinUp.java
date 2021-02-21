@@ -1,10 +1,12 @@
 package frc.robot.commands;
 
 import java.util.function.DoubleSupplier;
+import java.util.function.Function;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ChassisSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import jdk.nashorn.internal.ir.FunctionCall;
 
 /**
  * Command responsible for using 2 joysticks to drive the robot.
@@ -16,22 +18,18 @@ public class ShooterSpinUp extends CommandBase {
     /**
      * Creates a new DriveByJoy command.
      * 
-     * @param shooter Shooter subsystem.
-     * @param supplier    Supplier for motor output.
+     * @param shooter  Shooter subsystem.
+     * @param supplier Supplier for motor output.
      */
-    public DriveByJoy(ShooterSubsystem shooter, DoubleSupplier supplier)
-        this.addRequirements(chassis);
+    public ShooterSpinUp(ShooterSubsystem shooter, DoubleSupplier supplier) {
+        this.addRequirements(shooter);
         this.m_shooter = shooter;
         this.m_supplier = supplier;
     }
 
     @Override
     public void initialize() {
-    }
-
-    @Override
-    public void execute() {
-        this.m_chassis.set(this.m_left.getAsDouble(), this.m_right.getAsDouble());
+        this.m_shooter.setPID(this.m_supplier.getAsDouble());
     }
 
     @Override
@@ -41,6 +39,6 @@ public class ShooterSpinUp extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        this.m_chassis.set(0, 0);
+        this.m_shooter.setPID(0);
     }
 }
