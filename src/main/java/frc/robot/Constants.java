@@ -32,6 +32,6 @@ public final class Constants {
     public class Climb {
         public static final int kRight = 15;
         public static final int kLeft = 14;
-        public static final int DIO = 16;
+        public static final int kHallEffect = 16;
     }
 }

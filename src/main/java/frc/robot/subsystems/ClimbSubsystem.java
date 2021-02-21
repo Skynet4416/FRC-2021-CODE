@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ClimbSubsystem extends SubsystemBase {
-    private VictorSPX _right = new VictorSPX(Constants.Climb.kRight);
-    private VictorSPX _left = new VictorSPX(Constants.Climb.kLeft);
-    DigitalInput _hallEffect = new DigitalInput(Constants.Climb.DIO);
+    private VictorSPX kRight = new VictorSPX(Constants.Climb.kRight);
+    private VictorSPX kLeft = new VictorSPX(Constants.Climb.kLeft);
+    DigitalInput kHallEffect = new DigitalInput(Constants.Climb.kHallEffect);
     
     /**
      * Set climb right motor output.
@@ -20,12 +20,11 @@ public class ClimbSubsystem extends SubsystemBase {
      */
     public void setRight(double right) {
         if (Math.abs(right) > 1) {
-            // On invalid value, print error and return.
-            System.out.println("Climb: invalid value recieved to right engine");
+            System.out.println("Climb: value for right engine isn't in range");
             return;
         }
 
-        this._right.set(ControlMode.PercentOutput, right);
+        this.kRight.set(ControlMode.PercentOutput, right);
     }
 
     /**
@@ -35,22 +34,16 @@ public class ClimbSubsystem extends SubsystemBase {
      */
     public void setLeft(double left) {
         if (Math.abs(left) > 1) {
-            // On invalid value, print error and return.
-            System.out.println("Climb: invalid value recieved to left engine");
+            System.out.println("Climb: value for left engine isn't in range");
             return;
         }
 
-        this._left.set(ControlMode.PercentOutput, left);
+        this.kLeft.set(ControlMode.PercentOutput, left);
     }
     /**
      * @return hall effect status
      */
     public boolean getHallEffectStatus(){
-        return _hallEffect.get();
-    }
-    @Override
-    public void periodic() {
-        // This method will be called once per scheduler run
-        // Can be used for setting values in smart dashboard
+        return kHallEffect.get();
     }
 }
