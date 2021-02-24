@@ -29,4 +29,9 @@ public final class Constants {
         public static final int kRightJoy = 1;
         public static final int kSystemsController = 0;
     }
+    public class Climb {
+        public static final int kRight = 15;
+        public static final int kLeft = 14;
+        public static final int kHallEffect = 16;
+    }
 }
