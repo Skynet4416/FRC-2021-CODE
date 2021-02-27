@@ -33,5 +33,6 @@ public final class Constants {
         public static final int kRight = 15;
         public static final int kLeft = 14;
         public static final int kHallEffect = 16;
+        public static final double kClimbMaxHeightSpeed = 1; // Set the Climb Subsystems' engines' power for climbing to the maximum height here
     }
 }
