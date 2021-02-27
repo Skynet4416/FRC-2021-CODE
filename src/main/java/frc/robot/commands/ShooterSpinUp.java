@@ -9,7 +9,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 // import jdk.nashorn.internal.ir.FunctionCall;
 
 /**
- * Command responsible for using 2 joysticks to drive the robot.
+ * Command responsible for ShooterSpinUp
  */
 public class ShooterSpinUp extends CommandBase {
     private ShooterSubsystem m_shooter;
