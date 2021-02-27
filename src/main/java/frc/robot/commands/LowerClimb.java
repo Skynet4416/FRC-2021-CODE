@@ -6,7 +6,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.ClimbSubsystem;
 
 /**
- * Command responsible for using 2 joysticks to drive the robot.
+ * Command responsible for lowering each arm individually or simultaneously
  */
 public class LowerClimb extends CommandBase {
     private ClimbSubsystem climb;
