@@ -49,13 +49,6 @@ public class IndexingSubsystem extends SubsystemBase {
             System.out.println("Indexing: invalid value recieved to load");
             return;
         }
-        this._spinner.set(ControlMode.PercentOutput, load);
-    }
-    
-
-    @Override
-    public void periodic() {
-        // This method will be called once per scheduler run
-        // Can be used for setting values in smart dashboard
+        this._loader.set(ControlMode.PercentOutput, load);
     }
 }

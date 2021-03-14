@@ -24,9 +24,19 @@ public final class Constants {
         }
     }
 
+    public class Indexing {
+        public class Motors {
+            public static final int kSpinner = -1;
+            public static final int kLoader = -1;
+        }
+    }    
+
+
     public class Controls {
         public static final int kLeftJoy = 2;
         public static final int kRightJoy = 1;
         public static final int kSystemsController = 0;
     }
+
+
 }
