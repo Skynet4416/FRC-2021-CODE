@@ -17,11 +17,7 @@ public class IndexingSubsystem extends SubsystemBase {
      * Creates the subsystem and configures motor controllers.
      */
     public IndexingSubsystem() {
-        // Sets slaves to follow masters.
-        // this._rightSlave.follow(this._rightMaster);
-        // this._leftSlave.follow(this._leftMaster);
-        // this._rightSlave.setInverted(false);
-        // this._leftSlave.setInverted(false);
+        // nothing to write
     }
 
     /**
