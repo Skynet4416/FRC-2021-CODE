@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.SubsystemsFunctions;
 
 /**
  * Chassis subsystem.
@@ -16,9 +17,6 @@ public class IndexingSubsystem extends SubsystemBase {
     /**
      * Creates the subsystem and configures motor controllers.
      */
-    public IndexingSubsystem() {
-        // nothing to write
-    }
 
     /**
      * Set indexing spin motor output.
@@ -26,12 +24,9 @@ public class IndexingSubsystem extends SubsystemBase {
      * @param spin  Spinner setpoint (percentage).
      */
     public void setSpinner(double spin) {
-        if (Math.abs(spin) > 1) {
-            // On invalid value, print error and return.
-            System.out.println("Indexing: invalid value recieved to spin");
-            return;
+        if (SubsystemsFunctions.validPower(spin)) {
+            this._spinner.set(ControlMode.PercentOutput, spin);
         }
-        this._spinner.set(ControlMode.PercentOutput, spin);
     }
 
     /**
@@ -40,11 +35,8 @@ public class IndexingSubsystem extends SubsystemBase {
      * @param load  Loader setpoint (percentage).
      */
     public void setLoader(double load) {
-        if (Math.abs(load) > 1) {
-            // On invalid value, print error and return.
-            System.out.println("Indexing: invalid value recieved to load");
-            return;
+        if (SubsystemsFunctions.validPower(load)) {
+            this._loader.set(ControlMode.PercentOutput, load);
         }
-        this._loader.set(ControlMode.PercentOutput, load);
     }
 }
