@@ -24,7 +24,6 @@ public final class Constants {
         }
     }
 
-<<<<<<< HEAD
     public class Indexing {
         public class Motors {
             public static final int kSpinner = -1;
@@ -32,18 +31,15 @@ public final class Constants {
         }
     }    
 
-=======
     public class Intake {
         public class Motors {
             public static final int kDeploy = -1;
             public static final int kIntake = -1;
         }
-
         public class IntakeContinously {
-            public static final double kSpeed = -1;
+            public static final double kSpeed = 1;
         }
     }
->>>>>>> dc75291 (constants updated)
 
     public class Controls {
         public static final int kLeftJoy = 2;
