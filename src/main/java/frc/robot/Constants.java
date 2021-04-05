@@ -46,7 +46,8 @@ public final class Constants {
         public static final int kRight = 15;
         public static final int kLeft = 14;
         public static final int kHallEffect = 16;
-        public static final int kLowerSpeed = -1; // needs to be initialized, used for right and left
+        public static final int kLowerSpeed = -1;
+        public static final int kClimbMaxHeightSpeed = -1;
     }
 
     public class Controls {
