@@ -79,4 +79,10 @@ public final class Constants {
             public static final String ShooterKF = "Shooter kF";
         }
     }
+
+    public class Vision {
+        public static final String kVisionTableKey = "vision";
+        public static final String kVisionDistanceKey = "distance";
+        public static final String kVisionAngleKey = "angle";
+    }
 }
