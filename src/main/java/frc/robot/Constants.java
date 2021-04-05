@@ -24,6 +24,17 @@ public final class Constants {
         }
     }
 
+    public class Intake {
+        public class Motors {
+            public static final int kDeploy = -1;
+            public static final int kIntake = -1;
+        }
+
+        public class IntakeContinously {
+            public static final double kSpeed = -1;
+        }
+    }
+  
     public class Indexing {
         public class Motors {
             public static final int kSpinner = -1;
@@ -31,17 +42,16 @@ public final class Constants {
         }
     }    
 
+    public class Climb {
+        public static final int kRight = 15;
+        public static final int kLeft = 14;
+        public static final int kHallEffect = 16;
+        public static final int kLowerSpeed = -1; // needs to be initialized, used for right and left
 
     public class Controls {
         public static final int kLeftJoy = 2;
         public static final int kRightJoy = 1;
         public static final int kSystemsController = 0;
-    }
-
-    public class Climb {
-        public static final int kRight = 15;
-        public static final int kLeft = 14;
-        public static final int kHallEffect = 16;
         public static final double kClimbMaxHeightSpeed = 1; // Set the Climb Subsystems' engines' power for climbing to the maximum height here
     }
 
