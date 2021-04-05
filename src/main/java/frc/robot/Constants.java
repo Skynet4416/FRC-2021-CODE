@@ -24,6 +24,14 @@ public final class Constants {
         }
     }
 
+    public class Indexing {
+        public class Motors {
+            public static final int kSpinner = -1;
+            public static final int kLoader = -1;
+        }
+    }    
+
+
     public class Controls {
         public static final int kLeftJoy = 2;
         public static final int kRightJoy = 1;
@@ -34,6 +42,7 @@ public final class Constants {
         public static final int kRight = 15;
         public static final int kLeft = 14;
         public static final int kHallEffect = 16;
+        public static final double kClimbMaxHeightSpeed = 1; // Set the Climb Subsystems' engines' power for climbing to the maximum height here
     }
 
     public class Shooter {

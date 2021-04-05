@@ -7,10 +7,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.ClimbMaxHeight;
 import frc.robot.commands.DriveByJoy;
 import frc.robot.commands.ShooterSpinUp;
 import frc.robot.subsystems.ChassisSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.ClimbSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -25,6 +27,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ChassisSubsystem m_chassis = new ChassisSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
+  private final ClimbSubsystem m_climb = new ClimbSubsystem();
 
   private final Joystick m_leftJoy = new Joystick(Constants.Controls.kLeftJoy);
   private final Joystick m_rightJoy = new Joystick(Constants.Controls.kRightJoy);
@@ -32,6 +35,7 @@ public class RobotContainer {
   private final XboxController m_systemsController = new XboxController(Constants.Controls.kSystemsController);
   private final JoystickButton m_shooterSpinUp = new JoystickButton(m_systemsController,
       XboxController.Button.kX.value);
+  private final JoystickButton m_climbMax_button = new JoystickButton(m_systemsController, XboxController.Button.kY.value);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -52,8 +56,9 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     this.m_shooterSpinUp.whileHeld(new ShooterSpinUp(this.m_shooter, () -> 0.2));// double supplier has to be coded
+    this.m_climbMax_button.whenPressed(new ClimbMaxHeight(this.m_climb));
   }
-
+  
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
