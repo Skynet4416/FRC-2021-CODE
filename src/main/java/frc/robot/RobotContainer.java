@@ -7,12 +7,17 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.ClimbMaxHeight;
 import frc.robot.commands.DriveByJoy;
 import frc.robot.commands.IntakeContinously;
 import frc.robot.commands.LowerClimb;
 import frc.robot.subsystems.ChassisSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.commands.ShooterSpinUp;
+import frc.robot.subsystems.ChassisSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.ClimbSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -27,6 +32,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ChassisSubsystem m_chassis = new ChassisSubsystem();
   private final IntakeSubsystem m_intake = new IntakeSubsystem();
+  private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final ClimbSubsystem m_climb = new ClimbSubsystem();
 
   private final Joystick m_leftJoy = new Joystick(Constants.Controls.kLeftJoy);
@@ -40,6 +46,10 @@ public class RobotContainer {
       XboxController.Button.kBumperLeft.value);
   private final JoystickButton m_lower_right_arm = new JoystickButton(m_systemsController,
       XboxController.Button.kBumperRight.value);
+
+  private final JoystickButton m_shooterSpinUp = new JoystickButton(m_systemsController,
+      XboxController.Button.kX.value);
+  private final JoystickButton m_climbMax_button = new JoystickButton(m_systemsController, XboxController.Button.kY.value);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -62,9 +72,10 @@ public class RobotContainer {
     this.m_intake_button.whileHeld(new IntakeContinously(this.m_intake));
     this.m_lower_left_arm.whileHeld(new LowerClimb(this.m_climb, false, true));
     this.m_lower_right_arm.whileHeld(new LowerClimb(this.m_climb, true, false));
-
+    this.m_shooterSpinUp.whileHeld(new ShooterSpinUp(this.m_shooter, () -> 0.2));// double supplier has to be coded
+    this.m_climbMax_button.whenPressed(new ClimbMaxHeight(this.m_climb));
   }
-
+  
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
