@@ -25,6 +25,9 @@ public final class Constants {
     }
 
     public class Intake {
+        public static final double kDeployPower = 1;
+        public static final double kMaxDeployCurrent = -1;
+
         public class Motors {
             public static final int kDeploy = -1;
             public static final int kIntake = -1;

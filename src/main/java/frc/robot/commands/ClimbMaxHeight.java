@@ -5,10 +5,11 @@ import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.Constants;
 
 /**
-* Command responsible for moving both climb arms to their max height (until the hall effect sensor is triggered).
-* Activated by pressing Y on the Xbox Controller.
-*/
-public class ClimbMaxHeight extends CommandBase{
+ * Command responsible for moving both climb arms to their max height (until the
+ * hall effect sensor is triggered). Activated by pressing Y on the Xbox
+ * Controller.
+ */
+public class ClimbMaxHeight extends CommandBase {
     private ClimbSubsystem k_climb;
 
     /**
@@ -17,7 +18,7 @@ public class ClimbMaxHeight extends CommandBase{
      * @param climb Climb subsystem.
      */
     public ClimbMaxHeight(ClimbSubsystem climb) {
-        this.addRequirements(this.k_climb);
+        this.addRequirements(climb);
         this.k_climb = climb;
     }
 

@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -11,13 +13,15 @@ import frc.robot.Constants;
  */
 public class IntakeSubsystem extends SubsystemBase {
     // Initialize motor controllers.
-    private VictorSPX _deploy = new VictorSPX(Constants.Intake.Motors.kDeploy);
+    private TalonSRX _deploy = new TalonSRX(Constants.Intake.Motors.kDeploy);
     private VictorSPX _intake = new VictorSPX(Constants.Intake.Motors.kIntake);
 
     /**
      * Creates the subsystem and configures motor controllers.
      */
     public IntakeSubsystem() {
+        _deploy.setInverted(InvertType.InvertMotorOutput);
+        _intake.setInverted(InvertType.InvertMotorOutput);
     }
 
     /**
@@ -46,6 +50,13 @@ public class IntakeSubsystem extends SubsystemBase {
             return;
         }
         this._intake.set(ControlMode.PercentOutput, power);
+    }
+
+    /**
+     * Get deploy motor's drawn current.
+     */
+    public double getDeployCurrent() {
+        return this._deploy.getStatorCurrent();
     }
 
     @Override

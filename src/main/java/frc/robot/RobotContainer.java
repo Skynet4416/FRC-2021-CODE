@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.Shooter;
 import frc.robot.commands.DriveByJoy;
+import frc.robot.commands.ExtendIntake;
 import frc.robot.commands.IntakeContinously;
 import frc.robot.subsystems.ChassisSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -41,6 +42,8 @@ public class RobotContainer {
 
   private final JoystickButton m_intake_button = new JoystickButton(m_systemsController,
       XboxController.Button.kA.value);
+  private final JoystickButton m_deploy_intake_button = new JoystickButton(m_systemsController,
+      XboxController.Button.kY.value);
 
   private final JoystickButton m_shooterSpinUp = new JoystickButton(m_systemsController,
       XboxController.Button.kX.value);
@@ -72,6 +75,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     this.m_intake_button.whileHeld(new IntakeContinously(this.m_intake));
     this.m_shooterSpinUp.whileHeld(new ShooterSpinUp(this.m_shooter, () -> Shooter.kFallbackShooterSpeed));
+    this.m_deploy_intake_button.whileHeld(new ExtendIntake(this.m_intake));
 
     // this.m_lower_left_arm.whileHeld(new LowerClimb(this.m_climb, false, true));
     // this.m_lower_right_arm.whileHeld(new LowerClimb(this.m_climb, true, false));

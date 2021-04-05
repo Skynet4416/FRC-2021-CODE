@@ -17,9 +17,8 @@ public class IntakeContinously extends CommandBase {
      * @param intake intake subsystem.
      */
     public IntakeContinously(IntakeSubsystem intake) {
+        this.addRequirements(intake);
         this.intake = intake;
-        this.addRequirements(this.intake);
-
     }
 
     @Override

@@ -19,8 +19,8 @@ public class LowerClimb extends CommandBase {
      * @param climb intake subsystem.
      */
     public LowerClimb(ClimbSubsystem climb, boolean right, boolean left) {
+        this.addRequirements(climb);
         this.climb = climb;
-        this.addRequirements(this.climb);
         this.left = left;
         this.right = right;
     }
