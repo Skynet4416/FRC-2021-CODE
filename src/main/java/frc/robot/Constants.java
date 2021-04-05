@@ -60,6 +60,7 @@ public final class Constants {
     public class Shooter {
         public static final int kShooterMaster = 0;
         public static final int kShooterSlave = 0;
+        public static final double kFallbackShooterSpeed = 0.2;
 
         public class PID {
             public static final double kP = 0;
