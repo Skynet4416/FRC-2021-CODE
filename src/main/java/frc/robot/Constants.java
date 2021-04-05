@@ -47,6 +47,7 @@ public final class Constants {
         public static final int kLeft = 14;
         public static final int kHallEffect = 16;
         public static final int kLowerSpeed = -1; // needs to be initialized, used for right and left
+    }
 
     public class Controls {
         public static final int kLeftJoy = 2;
