@@ -37,10 +37,31 @@ public final class Constants {
         public static final int kRightJoy = 1;
         public static final int kSystemsController = 0;
     }
+
     public class Climb {
         public static final int kRight = 15;
         public static final int kLeft = 14;
         public static final int kHallEffect = 16;
         public static final double kClimbMaxHeightSpeed = 1; // Set the Climb Subsystems' engines' power for climbing to the maximum height here
+    }
+
+    public class Shooter {
+        public static final int kShooterMaster = 0;
+        public static final int kShooterSlave = 0;
+
+        public class PID {
+            public static final double kP = 0;
+            public static final double kI = 0;
+            public static final double kD = 0;
+            public static final double kF = 0;
+            public static final double kIZone = 0;
+        }
+
+        public class SmartDashboard {
+            public static final String ShooterKP = "Shooter kP";
+            public static final String ShooterKI = "Shooter kI";
+            public static final String ShooterKD = "Shooter kD";
+            public static final String ShooterKF = "Shooter kF";
+        }
     }
 }
