@@ -26,22 +26,22 @@ public final class Constants {
 
     public class Intake {
         public static final double kDeployPower = 1;
-        public static final double kMaxDeployCurrent = -1;
+        public static final double kMaxDeployCurrent = 40; 
 
         public class Motors {
-            public static final int kDeploy = -1;
-            public static final int kIntake = -1;
+            public static final int kDeploy = 1;
+            public static final int kIntake = 2;
         }
 
         public class IntakeContinously {
-            public static final double kSpeed = -1;
+            public static final double kSpeed = 0.85;
         }
     }
   
     public class Indexing {
         public class Motors {
-            public static final int kSpinner = -1;
-            public static final int kLoader = -1;
+            public static final int kSpinner = 3;
+            public static final int kLoader = 4;
         }
     }    
 
@@ -57,12 +57,11 @@ public final class Constants {
         public static final int kLeftJoy = 2;
         public static final int kRightJoy = 1;
         public static final int kSystemsController = 0;
-        public static final double kClimbMaxHeightSpeed = 1; // Set the Climb Subsystems' engines' power for climbing to the maximum height here
     }
 
     public class Shooter {
-        public static final int kShooterMaster = 0;
-        public static final int kShooterSlave = 0;
+        public static final int kShooterMaster = 5;
+        public static final int kShooterSlave = 6;
         public static final double kFallbackShooterSpeed = 0.2;
 
         public class PID {
