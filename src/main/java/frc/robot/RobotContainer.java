@@ -7,9 +7,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.ClimbMaxHeight;
 import frc.robot.commands.DriveByJoy;
 import frc.robot.subsystems.ChassisSubsystem;
+import frc.robot.subsystems.ClimbSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -20,11 +23,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ChassisSubsystem m_chassis = new ChassisSubsystem();
+  private final ClimbSubsystem m_climb = new ClimbSubsystem();
 
   private final Joystick m_leftJoy = new Joystick(Constants.Controls.kLeftJoy);
   private final Joystick m_rightJoy = new Joystick(Constants.Controls.kRightJoy);
 
   private final XboxController m_systemsController = new XboxController(Constants.Controls.kSystemsController);
+  private final JoystickButton m_climbMax_button = new JoystickButton(m_systemsController, XboxController.Button.kY.value);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -41,8 +46,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
-
+  private void configureButtonBindings() {
+    this.m_climbMax_button.whenPressed(new ClimbMaxHeight(this.m_climb));
+  }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
