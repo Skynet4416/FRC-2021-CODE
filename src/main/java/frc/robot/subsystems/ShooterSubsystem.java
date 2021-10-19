@@ -60,12 +60,17 @@ public class ShooterSubsystem extends SubsystemBase {
         
         SmartDashboard.putNumber("Shooter Output", m_shooterMaster.getAppliedOutput());
         SmartDashboard.putNumber("Shooter Velocity (RPM)", m_encoder.getVelocity());
+        SmartDashboard.putNumber("Shooter Current", m_shooterMaster.getOutputCurrent());
+
+        SmartDashboard.putNumber("Shooter Slave Output", m_shooterSlave.getAppliedOutput());
     }
+
     /**
      * set power by rpm
      * @param rpm
      */
     public void setPID(double rpm) {
+        m_pidController.setIAccum(0);
         m_pidController.setReference(rpm, ControlType.kVelocity);
     }
     /**

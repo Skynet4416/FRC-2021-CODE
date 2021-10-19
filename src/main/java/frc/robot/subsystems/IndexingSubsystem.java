@@ -1,19 +1,19 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.SubsystemsFunctions;
 
 /**
- * Chassis subsystem.
+ * Indexing subsystem.
  */
 public class IndexingSubsystem extends SubsystemBase {
     // Initialize motor controllers.
-    private TalonSRX _spinner = new TalonSRX(Constants.Indexing.Motors.kSpinner);
-    private TalonSRX _loader = new TalonSRX(Constants.Indexing.Motors.kLoader);
+    private VictorSPX _spinner = new VictorSPX(Constants.Indexing.Motors.kSpinner);
+    private VictorSPX _loader = new VictorSPX(Constants.Indexing.Motors.kLoader);
     /**
      * Creates the subsystem and configures motor controllers.
      */

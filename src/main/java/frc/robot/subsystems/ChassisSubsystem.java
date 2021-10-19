@@ -22,7 +22,7 @@ public class ChassisSubsystem extends SubsystemBase {
      */
     public ChassisSubsystem() {
         // Reverse right side so both sides run in the same direction.
-        this._rightMaster.setInverted(InvertType.InvertMotorOutput);
+        this._leftMaster.setInverted(InvertType.InvertMotorOutput);
 
         // Sets slaves to follow masters.
         this._rightSlave.follow(this._rightMaster);

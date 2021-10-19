@@ -20,8 +20,8 @@ public class IntakeSubsystem extends SubsystemBase {
      * Creates the subsystem and configures motor controllers.
      */
     public IntakeSubsystem() {
-        _deploy.setInverted(InvertType.InvertMotorOutput);
-        _intake.setInverted(InvertType.InvertMotorOutput);
+        // _deploy.setInverted(InvertType.InvertMotorOutput);
+        // _intake.setInverted(InvertType.InvertMotorOutput);
     }
 
     /**

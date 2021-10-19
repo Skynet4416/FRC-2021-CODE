@@ -33,7 +33,13 @@ public class DriveByJoy extends CommandBase {
 
     @Override
     public void execute() {
-        this.m_chassis.set(this.m_left.getAsDouble(), this.m_right.getAsDouble());
+        double left = this.m_left.getAsDouble();
+        left = Math.abs(left) > 0.1 ? left : 0;
+        
+        double right = this.m_right.getAsDouble();
+        right = Math.abs(right) > 0.1 ? right : 0;
+
+        this.m_chassis.set(left, right);
     }
 
     @Override

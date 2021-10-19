@@ -3,7 +3,9 @@ package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 // import java.util.function.Function;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.Shooter;
 // import frc.robot.subsystems.ChassisSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 // import jdk.nashorn.internal.ir.FunctionCall;
@@ -25,11 +27,14 @@ public class ShooterSpinUp extends CommandBase {
         this.addRequirements(shooter);
         this.m_shooter = shooter;
         this.m_supplier = supplier;
+        
+        SmartDashboard.putNumber(Shooter.SmartDashboard.ShooterSetpoint, 4000);
     }
 
     @Override
     public void initialize() {
-        this.m_shooter.setPID(this.m_supplier.getAsDouble());
+        this.m_shooter.setPID(SmartDashboard.getNumber(Shooter.SmartDashboard.ShooterSetpoint, 0));
+        // this.m_shooter.setManual(1);
     }
 
     @Override
@@ -40,5 +45,6 @@ public class ShooterSpinUp extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         this.m_shooter.setPID(0);
+        // this.m_shooter.setManual(0);
     }
 }

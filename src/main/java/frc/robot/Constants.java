@@ -29,19 +29,22 @@ public final class Constants {
         public static final double kMaxDeployCurrent = 40; 
 
         public class Motors {
-            public static final int kDeploy = 1;
-            public static final int kIntake = 2;
+            public static final int kDeploy = 100;
+            public static final int kIntake = 20;
         }
 
         public class IntakeContinously {
-            public static final double kSpeed = 0.85;
+            public static final double kSpeed = 0.55;
         }
     }
   
     public class Indexing {
+        public static final double kSpinSpeed = 0.5;
+        public static final double kLoadingSpeed = 0.7;
+
         public class Motors {
-            public static final int kSpinner = 3;
-            public static final int kLoader = 4;
+            public static final int kSpinner = 30;
+            public static final int kLoader = 40;
         }
     }    
 
@@ -60,16 +63,16 @@ public final class Constants {
     }
 
     public class Shooter {
-        public static final int kShooterMaster = 5;
-        public static final int kShooterSlave = 6;
-        public static final double kFallbackShooterSpeed = 0.2;
+        public static final int kShooterMaster = 41;
+        public static final int kShooterSlave = 42;
+        public static final double kFallbackShooterSpeed = 1;
 
         public class PID {
             public static final double kP = 0;
             public static final double kI = 0;
             public static final double kD = 0;
             public static final double kF = 0;
-            public static final double kIZone = 0;
+            public static final double kIZone = 3000;
         }
 
         public class SmartDashboard {
@@ -77,6 +80,7 @@ public final class Constants {
             public static final String ShooterKI = "Shooter kI";
             public static final String ShooterKD = "Shooter kD";
             public static final String ShooterKF = "Shooter kF";
+            public static final String ShooterSetpoint = "Shooter Setpoint";
         }
     }
 

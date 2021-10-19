@@ -11,7 +11,9 @@ import frc.robot.Constants.Shooter;
 import frc.robot.commands.DriveByJoy;
 import frc.robot.commands.ExtendIntake;
 import frc.robot.commands.IntakeContinously;
+import frc.robot.commands.LoadIntoShooter;
 import frc.robot.subsystems.ChassisSubsystem;
+import frc.robot.subsystems.IndexingSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 // import frc.robot.subsystems.ClimbSubsystem;
 // import frc.robot.commands.LowerClimb;
@@ -32,6 +34,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ChassisSubsystem m_chassis = new ChassisSubsystem();
   private final IntakeSubsystem m_intake = new IntakeSubsystem();
+  private final IndexingSubsystem m_indexing = new IndexingSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   // private final ClimbSubsystem m_climb = new ClimbSubsystem();
 
@@ -45,6 +48,8 @@ public class RobotContainer {
   private final JoystickButton m_deploy_intake_button = new JoystickButton(m_systemsController,
       XboxController.Button.kY.value);
 
+  private final JoystickButton m_indexingLoadButton = new JoystickButton(m_systemsController,
+      XboxController.Button.kB.value);
   private final JoystickButton m_shooterSpinUp = new JoystickButton(m_systemsController,
       XboxController.Button.kX.value);
 
@@ -74,8 +79,9 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     this.m_intake_button.whileHeld(new IntakeContinously(this.m_intake));
+    this.m_indexingLoadButton.whileHeld(new LoadIntoShooter(this.m_indexing));
     this.m_shooterSpinUp.whileHeld(new ShooterSpinUp(this.m_shooter, () -> Shooter.kFallbackShooterSpeed));
-    this.m_deploy_intake_button.whileHeld(new ExtendIntake(this.m_intake));
+    // this.m_deploy_intake_button.whileHeld(new ExtendIntake(this.m_intake));
 
     // this.m_lower_left_arm.whileHeld(new LowerClimb(this.m_climb, false, true));
     // this.m_lower_right_arm.whileHeld(new LowerClimb(this.m_climb, true, false));
