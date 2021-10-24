@@ -4,13 +4,14 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 /**
  * Chassis subsystem.
  */
-public class ChassisSubsystem extends SubsystemBase {
+public class ChassisSubsystem {
     // Initialize motor controllers.
     private TalonSRX _rightMaster = new TalonSRX(Constants.Chassis.Motors.kMasterRight);
     private TalonSRX _rightSlave = new TalonSRX(Constants.Chassis.Motors.kSlaveRight);
@@ -20,7 +21,7 @@ public class ChassisSubsystem extends SubsystemBase {
     /**
      * Creates the subsystem and configures motor controllers.
      */
-    public ChassisSubsystem() {
+    public ChassisSubsystem () {
         // Reverse right side so both sides run in the same direction.
         this._leftMaster.setInverted(InvertType.InvertMotorOutput);
 
@@ -43,7 +44,7 @@ public class ChassisSubsystem extends SubsystemBase {
             System.out.println("Chassis: invalid value recieved to drive");
             return;
         }
-
+        
         this._rightMaster.set(ControlMode.PercentOutput, right);
         this._leftMaster.set(ControlMode.PercentOutput, left);
     }

@@ -22,6 +22,9 @@ import frc.robot.commands.ShooterSpinUp;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
+import frc.robot.commands.TurnToAngle;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -37,6 +40,7 @@ public class RobotContainer {
   private final IndexingSubsystem m_indexing = new IndexingSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   // private final ClimbSubsystem m_climb = new ClimbSubsystem();
+  private final AHRS m_ahrs; 
 
   private final Joystick m_leftJoy = new Joystick(Constants.Controls.kLeftJoy);
   private final Joystick m_rightJoy = new Joystick(Constants.Controls.kRightJoy);
@@ -59,16 +63,22 @@ public class RobotContainer {
       XboxController.Button.kBumperRight.value);
   private final JoystickButton m_climbMax_button = new JoystickButton(m_systemsController,
       XboxController.Button.kY.value);
+ 
+  // private final JoystickButton turn_test_button = new JoystickButton(m_systemsController,
+  //     XboxController.Button.kB.value);
+  
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+    m_ahrs = new AHRS(SPI.Port.kMXP); // navX init
+
     // Configure the button bindings
     configureButtonBindings();
 
     // Set default commands.
-    m_chassis.setDefaultCommand(new DriveByJoy(m_chassis, m_leftJoy::getY, m_rightJoy::getY));
+    //m_chassis.setDefaultCommand(new DriveByJoy(m_chassis, m_leftJoy::getY, m_rightJoy::getY));
   }
 
   /**
@@ -86,6 +96,8 @@ public class RobotContainer {
     // this.m_lower_left_arm.whileHeld(new LowerClimb(this.m_climb, false, true));
     // this.m_lower_right_arm.whileHeld(new LowerClimb(this.m_climb, true, false));
     // this.m_climbMax_button.whenPressed(new ClimbMaxHeight(this.m_climb));
+    
+    // this.turn_test_button.whenPressed(new TurnToAngle(110, m_ahrs, m_chassis));
   }
 
   /**
