@@ -11,6 +11,8 @@ import frc.robot.Constants.Shooter;
 import frc.robot.commands.DriveByJoy;
 import frc.robot.commands.ExtendIntake;
 import frc.robot.commands.IndexContinuously;
+import frc.robot.commands.IndexingReset;
+import frc.robot.commands.IndexingSpinForOneSlot;
 import frc.robot.commands.IntakeContinously;
 import frc.robot.commands.LoadIntoShooter;
 import frc.robot.subsystems.ChassisSubsystem;
@@ -69,6 +71,7 @@ public class RobotContainer {
   //     XboxController.Button.kY.value);
   private final JoystickButton m_indexing_spinner_button = new JoystickButton(m_systemsController, XboxController.Button.kY.value);
   private final JoystickButton m_shooting_sequence_button = new JoystickButton(m_systemsController, XboxController.Button.kBumperRight.value);
+  private final JoystickButton m_indexing_spin_one_slot_button = new JoystickButton(m_systemsController,XboxController.Button.kBumperLeft.value);
   // private final JoystickButton turn_test_button = new JoystickButton(m_systemsController,
   //     XboxController.Button.kB.value);
   
@@ -98,6 +101,8 @@ public class RobotContainer {
     this.m_shooterSpinUp.whileHeld(new ShooterSpinUp(this.m_shooter, () -> Shooter.kFallbackShooterSpeed));
     this.m_indexing_spinner_button.whileHeld(new IndexContinuously(this.m_indexing_spinner));
     this.m_shooting_sequence_button.whileHeld(new ShootingSequence(this.m_indexing_spinner));
+    this.m_indexing_spin_one_slot_button.whenReleased(new IndexingReset());
+    this.m_indexing_spin_one_slot_button.whileHeld(new IndexingSpinForOneSlot(this.m_indexing_spinner));
     // this.m_deploy_intake_button.whileHeld(new ExtendIntake(this.m_intake));
     // this.m_lower_left_arm.whileHeld(new LowerClimb(this.m_climb, false, true));
     // this.m_lower_right_arm.whileHeld(new LowerClimb(this.m_climb, true, false));

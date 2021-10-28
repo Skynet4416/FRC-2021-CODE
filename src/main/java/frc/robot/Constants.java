@@ -16,6 +16,9 @@ package frc.robot;
  */
 public final class Constants {
     public class Chassis {
+        public final static double kThershold = 10;
+        public final static double kTurnPowerPrecentage = 0.2;
+
         public class Motors {
             public static final int kMasterLeft = 11;
             public static final int kSlaveLeft = 12;

@@ -1,16 +1,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.Chassis;
+import frc.robot.Constants;
 import frc.robot.subsystems.ChassisSubsystem;
-
 import com.kauailabs.navx.frc.AHRS;
 
 // DISCLAIMER: this doesn't have PID Controller, tho it needs it
 
 public class TurnToAngle extends CommandBase{
-    private final double EPSILON = 10;
-    private double F = 0.2;
     private double targetAngle;
     private ChassisSubsystem chassis;
     private AHRS ahrs;
@@ -20,7 +17,7 @@ public class TurnToAngle extends CommandBase{
         @param angle the target angle relative to the robot intial position(90 forward, 0 right etc)
     */
 
-    public TurnToAngle(double angle, AHRS ahrs, ChassisSubsystem chassis){
+    public TurnToAngle(ChassisSubsystem chassis,double angle, AHRS ahrs){
         this.ahrs = ahrs;
         this.targetAngle = angle - 90 + this.ahrs.getAngle(); // the target angle based on the real world( ahrs.getAngle() )
         this.chassis = chassis;
@@ -29,15 +26,15 @@ public class TurnToAngle extends CommandBase{
     @Override
     public void initialize(){
         if(targetAngle > 90){ // left
-            this.chassis.set(-F, F);
+            this.chassis.set(-Constants.Chassis.kTurnPowerPrecentage, Constants.Chassis.kTurnPowerPrecentage);
         } else { // right
-            this.chassis.set(-F, F);
+            this.chassis.set(-Constants.Chassis.kTurnPowerPrecentage, Constants.Chassis.kTurnPowerPrecentage);
         }
     }
 
     @Override
     public boolean isFinished(){
-        return Math.abs(this.targetAngle - this.ahrs.getAngle()) < EPSILON;
+        return Math.abs(this.targetAngle - this.ahrs.getAngle()) < Constants.Chassis.kThershold;
     }
 
     @Override
