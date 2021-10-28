@@ -21,6 +21,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 // import frc.robot.commands.LowerClimb;
 // import frc.robot.commands.ClimbMaxHeight;
 import frc.robot.commands.ShooterSpinUp;
+import frc.robot.commands.ShootingSequence;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -67,7 +68,7 @@ public class RobotContainer {
   // private final JoystickButton m_climbMax_button = new JoystickButton(m_systemsController,
   //     XboxController.Button.kY.value);
   private final JoystickButton m_indexing_spinner_button = new JoystickButton(m_systemsController, XboxController.Button.kY.value);
-
+  private final JoystickButton m_shooting_sequence_button = new JoystickButton(m_systemsController, XboxController.Button.kBumperRight.value);
   // private final JoystickButton turn_test_button = new JoystickButton(m_systemsController,
   //     XboxController.Button.kB.value);
   
@@ -96,8 +97,8 @@ public class RobotContainer {
     this.m_indexingLoadButton.whileHeld(new LoadIntoShooter(this.m_indexing_loader));
     this.m_shooterSpinUp.whileHeld(new ShooterSpinUp(this.m_shooter, () -> Shooter.kFallbackShooterSpeed));
     this.m_indexing_spinner_button.whileHeld(new IndexContinuously(this.m_indexing_spinner));
+    this.m_shooting_sequence_button.whileHeld(new ShootingSequence(this.m_indexing_spinner));
     // this.m_deploy_intake_button.whileHeld(new ExtendIntake(this.m_intake));
-
     // this.m_lower_left_arm.whileHeld(new LowerClimb(this.m_climb, false, true));
     // this.m_lower_right_arm.whileHeld(new LowerClimb(this.m_climb, true, false));
     // this.m_climbMax_button.whenPressed(new ClimbMaxHeight(this.m_climb));

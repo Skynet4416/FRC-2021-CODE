@@ -20,7 +20,6 @@ public class IndexContinuously extends CommandBase {
     @Override
     public boolean isFinished() {
         System.out.println("isFinished");
-
         return false;
     }
 

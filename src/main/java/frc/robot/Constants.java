@@ -41,6 +41,7 @@ public final class Constants {
     public class Indexing {
         public static final double kSpinSpeed = 0.2;
         public static final double kLoadingSpeed = 0.2;
+        public static final int kTimeLimitSeconds = 1;
 
         public class Motors {
             public static final int kSpinner = 30;
@@ -90,3 +91,4 @@ public final class Constants {
         public static final String kVisionAngleKey = "angle";
     }
 }
+
