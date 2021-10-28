@@ -11,7 +11,7 @@ import frc.robot.Constants;
 /**
  * Chassis subsystem.
  */
-public class ChassisSubsystem {
+public class ChassisSubsystem extends SubsystemBase {
     // Initialize motor controllers.
     private TalonSRX _rightMaster = new TalonSRX(Constants.Chassis.Motors.kMasterRight);
     private TalonSRX _rightSlave = new TalonSRX(Constants.Chassis.Motors.kSlaveRight);

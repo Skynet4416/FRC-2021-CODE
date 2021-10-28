@@ -39,8 +39,8 @@ public final class Constants {
     }
   
     public class Indexing {
-        public static final double kSpinSpeed = 0.5;
-        public static final double kLoadingSpeed = 0.7;
+        public static final double kSpinSpeed = 0.2;
+        public static final double kLoadingSpeed = 0.2;
 
         public class Motors {
             public static final int kSpinner = 30;

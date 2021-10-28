@@ -1,22 +1,26 @@
+package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.IndexingSubsystem;
+import frc.robot.subsystems.IndexingSpinnerSubsystem;
 
 public class IndexContinuously extends CommandBase {
-    private IndexingSubsystem m_indexing;
+    private IndexingSpinnerSubsystem m_indexing;
 
-    public IndexContinuously(IndexingSubsystem indexing) {
+    public IndexContinuously(IndexingSpinnerSubsystem indexing) {
         this.addRequirements(indexing);
         this.m_indexing = indexing;
     }
 
     @Override
     public void initialize() {
+        System.out.println("initialize");
         this.m_indexing.setSpinner(Constants.Indexing.kSpinSpeed);
     }
 
     @Override
     public boolean isFinished() {
+        System.out.println("isFinished");
+
         return false;
     }
 

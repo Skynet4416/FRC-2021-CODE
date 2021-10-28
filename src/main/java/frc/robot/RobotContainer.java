@@ -10,10 +10,12 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.Shooter;
 import frc.robot.commands.DriveByJoy;
 import frc.robot.commands.ExtendIntake;
+import frc.robot.commands.IndexContinuously;
 import frc.robot.commands.IntakeContinously;
 import frc.robot.commands.LoadIntoShooter;
 import frc.robot.subsystems.ChassisSubsystem;
-import frc.robot.subsystems.IndexingSubsystem;
+import frc.robot.subsystems.IndexingLoaderSubsytem;
+import frc.robot.subsystems.IndexingSpinnerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 // import frc.robot.subsystems.ClimbSubsystem;
 // import frc.robot.commands.LowerClimb;
@@ -24,7 +26,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
-import frc.robot.commands.TurnToAngle;
+// import frc.robot.commands.TurnByAngle;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -37,8 +39,9 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ChassisSubsystem m_chassis = new ChassisSubsystem();
   private final IntakeSubsystem m_intake = new IntakeSubsystem();
-  private final IndexingSubsystem m_indexing = new IndexingSubsystem();
+  private final IndexingLoaderSubsytem m_indexing_loader = new IndexingLoaderSubsytem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
+  private final IndexingSpinnerSubsystem m_indexing_spinner = new IndexingSpinnerSubsystem();
   // private final ClimbSubsystem m_climb = new ClimbSubsystem();
   private final AHRS m_ahrs; 
 
@@ -49,21 +52,22 @@ public class RobotContainer {
 
   private final JoystickButton m_intake_button = new JoystickButton(m_systemsController,
       XboxController.Button.kA.value);
-  private final JoystickButton m_deploy_intake_button = new JoystickButton(m_systemsController,
-      XboxController.Button.kY.value);
+  // private final JoystickButton m_deploy_intake_button = new JoystickButton(m_systemsController,
+  //     XboxController.Button.kY.value);
 
   private final JoystickButton m_indexingLoadButton = new JoystickButton(m_systemsController,
       XboxController.Button.kB.value);
   private final JoystickButton m_shooterSpinUp = new JoystickButton(m_systemsController,
       XboxController.Button.kX.value);
 
-  private final JoystickButton m_lower_left_arm = new JoystickButton(m_systemsController,
-      XboxController.Button.kBumperLeft.value);
-  private final JoystickButton m_lower_right_arm = new JoystickButton(m_systemsController,
-      XboxController.Button.kBumperRight.value);
-  private final JoystickButton m_climbMax_button = new JoystickButton(m_systemsController,
-      XboxController.Button.kY.value);
- 
+  // private final JoystickButton m_lower_left_arm = new JoystickButton(m_systemsController,
+  //     XboxController.Button.kBumperLeft.value);
+  // private final JoystickButton m_lower_right_arm = new JoystickButton(m_systemsController,
+  //     XboxController.Button.kBumperRight.value);
+  // private final JoystickButton m_climbMax_button = new JoystickButton(m_systemsController,
+  //     XboxController.Button.kY.value);
+  private final JoystickButton m_indexing_spinner_button = new JoystickButton(m_systemsController, XboxController.Button.kY.value);
+
   // private final JoystickButton turn_test_button = new JoystickButton(m_systemsController,
   //     XboxController.Button.kB.value);
   
@@ -78,7 +82,7 @@ public class RobotContainer {
     configureButtonBindings();
 
     // Set default commands.
-    //m_chassis.setDefaultCommand(new DriveByJoy(m_chassis, m_leftJoy::getY, m_rightJoy::getY));
+    m_chassis.setDefaultCommand(new DriveByJoy(m_chassis, m_leftJoy::getY, m_rightJoy::getY));
   }
 
   /**
@@ -89,15 +93,16 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     this.m_intake_button.whileHeld(new IntakeContinously(this.m_intake));
-    this.m_indexingLoadButton.whileHeld(new LoadIntoShooter(this.m_indexing));
+    this.m_indexingLoadButton.whileHeld(new LoadIntoShooter(this.m_indexing_loader));
     this.m_shooterSpinUp.whileHeld(new ShooterSpinUp(this.m_shooter, () -> Shooter.kFallbackShooterSpeed));
+    this.m_indexing_spinner_button.whileHeld(new IndexContinuously(this.m_indexing_spinner));
     // this.m_deploy_intake_button.whileHeld(new ExtendIntake(this.m_intake));
 
     // this.m_lower_left_arm.whileHeld(new LowerClimb(this.m_climb, false, true));
     // this.m_lower_right_arm.whileHeld(new LowerClimb(this.m_climb, true, false));
     // this.m_climbMax_button.whenPressed(new ClimbMaxHeight(this.m_climb));
     
-    // this.turn_test_button.whenPressed(new TurnToAngle(110, m_ahrs, m_chassis));
+    //  this.turn_test_button.whenPressed(new TurnByAngle(110, m_ahrs, m_chassis));
   }
 
   /**
