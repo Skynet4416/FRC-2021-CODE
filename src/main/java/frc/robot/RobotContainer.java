@@ -4,10 +4,14 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.Shooter;
+import frc.robot.commands.ActivateShootingSequenceStart;
 import frc.robot.commands.DriveByJoy;
 import frc.robot.commands.ExtendIntake;
 import frc.robot.commands.IndexContinuously;
@@ -23,13 +27,13 @@ import frc.robot.subsystems.IntakeSubsystem;
 // import frc.robot.commands.LowerClimb;
 // import frc.robot.commands.ClimbMaxHeight;
 import frc.robot.commands.ShooterSpinUp;
-import frc.robot.commands.ShootingSequence;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 // import frc.robot.commands.TurnByAngle;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -39,6 +43,11 @@ import edu.wpi.first.wpilibj.SPI;
  * commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  NetworkTableInstance inst = NetworkTableInstance.getDefault();
+  NetworkTable visionTable = inst.getTable("Vision");
+  NetworkTableEntry angleFromTargetAntry = visionTable.getEntry("AngleFromTarget");
+  NetworkTableEntry distanceFromTargetAntry = visionTable.getEntry("DistanceFromTarget");
+
   // The robot's subsystems and commands are defined here...
   private final ChassisSubsystem m_chassis = new ChassisSubsystem();
   private final IntakeSubsystem m_intake = new IntakeSubsystem();
@@ -100,7 +109,8 @@ public class RobotContainer {
     this.m_indexingLoadButton.whileHeld(new LoadIntoShooter(this.m_indexing_loader));
     this.m_shooterSpinUp.whileHeld(new ShooterSpinUp(this.m_shooter, () -> Shooter.kFallbackShooterSpeed));
     this.m_indexing_spinner_button.whileHeld(new IndexContinuously(this.m_indexing_spinner));
-    this.m_shooting_sequence_button.whileHeld(new ShootingSequence(this.m_indexing_spinner));
+    // this.m_shooting_sequence_button.whileHeld(new ShootingSequence(this.m_indexing_spinner));
+    this.m_shooting_sequence_button.whileHeld(new ActivateShootingSequenceStart(this.m_shooter,this.m_indexing_loader,this.m_chassis,angleFromTargetAntry.getDouble(m_ahrs.getAngle()), m_ahrs));
     this.m_indexing_spin_one_slot_button.whenReleased(new IndexingReset());
     this.m_indexing_spin_one_slot_button.whileHeld(new IndexingSpinForOneSlot(this.m_indexing_spinner));
     // this.m_deploy_intake_button.whileHeld(new ExtendIntake(this.m_intake));

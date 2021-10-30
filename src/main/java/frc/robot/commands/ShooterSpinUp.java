@@ -16,8 +16,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class ShooterSpinUp extends CommandBase {
     private ShooterSubsystem m_shooter;
     private DoubleSupplier m_supplier;
-
-    /**
+    /**s
      * Creates a new DriveByJoy command.
      * 
      * @param shooter  Shooter subsystem.
@@ -27,9 +26,7 @@ public class ShooterSpinUp extends CommandBase {
         this.addRequirements(shooter);
         this.m_shooter = shooter;
         this.m_supplier = supplier;
-        
-        SmartDashboard.putNumber(Shooter.SmartDashboard.ShooterSetpoint, 4000);
-    }
+        }
 
     @Override
     public void initialize() {
