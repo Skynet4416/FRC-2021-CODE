@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.Shooter;
 import frc.robot.commands.ActivateShootingSequenceStart;
 import frc.robot.commands.DriveByJoy;
-import frc.robot.commands.ExtendIntake;
+// import frc.robot.commands.ExtendIntake;
 import frc.robot.commands.IndexContinuously;
 import frc.robot.commands.IndexingReset;
 import frc.robot.commands.IndexingSpinForOneSlot;
