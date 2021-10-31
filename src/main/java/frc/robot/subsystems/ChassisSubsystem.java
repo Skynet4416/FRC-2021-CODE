@@ -40,7 +40,6 @@ public class ChassisSubsystem extends SubsystemBase {
     public void set(double left, double right) {
         if (Math.abs(left) > 1 || Math.abs(right) > 1) {
             // On invalid value, print error and return.
-            System.out.println("Chassis: invalid value recieved to drive");
             return;
         }
         

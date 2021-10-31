@@ -29,9 +29,7 @@ public class IndexingSpinnerSubsystem extends SubsystemBase {
      * @param spin  Spinner setpoint (percentage).
      */
     public void setSpinner(double spin) {
-        System.out.println("set spinner");
         if (SubsystemsFunctions.validPower(spin)) {
-            System.out.println("valid power");
 
             this._spinner.set(ControlMode.PercentOutput, spin);
         }

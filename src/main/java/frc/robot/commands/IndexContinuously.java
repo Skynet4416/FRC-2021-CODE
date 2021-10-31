@@ -13,13 +13,11 @@ public class IndexContinuously extends CommandBase {
 
     @Override
     public void initialize() {
-        System.out.println("initialize");
         this.m_indexing.setSpinner(Constants.Indexing.kSpinSpeed);
     }
 
     @Override
     public boolean isFinished() {
-        System.out.println("isFinished");
         return false;
     }
 

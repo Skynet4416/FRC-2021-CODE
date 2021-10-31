@@ -41,10 +41,11 @@ public final class Constants {
         }
     }
   
+
     public class Indexing {
         public static final double kSpinSpeed = 0.2;
-        public static final double kLoadingSpeed = 0.2;
-        public static final int kTimeLimitSeconds = 1;
+        public static final double kLoadingSpeed = 1;
+        public static final int kTimeLimitSeconds = 500;
 
         public class Motors {
             public static final int kSpinner = 30;
@@ -72,10 +73,10 @@ public final class Constants {
         public static final double kFallbackShooterSpeed = 1;
 
         public class PID {
-            public static final double kP = 0;
-            public static final double kI = 0;
-            public static final double kD = 0;
-            public static final double kF = 0.000175;
+            public static final double kP = 0.00003;
+            public static final double kI = 0.00000003;
+            public static final double kD = 0.00000003;
+            public static final double kF = 0.000179;
             public static final double kIZone = 3000;
         }
 
@@ -89,7 +90,7 @@ public final class Constants {
     }
 
     public class Vision {
-        public static final String kVisionTableKey = "vision";
+        public static final String kVisionTableKey = "Vision";
         public static final String kVisionDistanceKey = "distance";
         public static final String kVisionAngleKey = "angle";
     }

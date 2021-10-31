@@ -31,7 +31,6 @@ public class IntakeSubsystem extends SubsystemBase {
     public void setDeploy(double power) {
         if (Math.abs(power) > 1) {
             // On invalid value, print error and return.
-            System.out.println("Intake (deploy): invalid value recieved to drive");
             return;
         }
         this._deploy.set(ControlMode.PercentOutput, power);
@@ -45,7 +44,6 @@ public class IntakeSubsystem extends SubsystemBase {
     public void setIntake(double power) {
         if (Math.abs(power) > 1) {
             // On invalid value, print error and return.
-            System.out.println("Intake: invalid value recieved to drive");
             return;
         }
         this._intake.set(ControlMode.PercentOutput, power);

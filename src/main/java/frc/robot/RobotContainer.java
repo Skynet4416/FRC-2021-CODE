@@ -45,9 +45,8 @@ import edu.wpi.first.wpilibj.SPI;
 public class RobotContainer {
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable visionTable = inst.getTable("Vision");
-  NetworkTableEntry angleFromTargetAntry = visionTable.getEntry("AngleFromTarget");
-  NetworkTableEntry distanceFromTargetAntry = visionTable.getEntry("DistanceFromTarget");
-
+  private NetworkTableEntry angleFromTargetAntry = visionTable.getEntry("aaa");
+  private NetworkTableEntry distanceFromTargetAntry = visionTable.getEntry("DistanceFromTarget");
   // The robot's subsystems and commands are defined here...
   private final ChassisSubsystem m_chassis = new ChassisSubsystem();
   private final IntakeSubsystem m_intake = new IntakeSubsystem();
@@ -78,6 +77,7 @@ public class RobotContainer {
   //     XboxController.Button.kBumperRight.value);
   // private final JoystickButton m_climbMax_button = new JoystickButton(m_systemsController,
   //     XboxController.Button.kY.value);
+
   private final JoystickButton m_indexing_spinner_button = new JoystickButton(m_systemsController, XboxController.Button.kY.value);
   private final JoystickButton m_shooting_sequence_button = new JoystickButton(m_systemsController, XboxController.Button.kBumperRight.value);
   private final JoystickButton m_indexing_spin_one_slot_button = new JoystickButton(m_systemsController,XboxController.Button.kBumperLeft.value);
@@ -105,19 +105,19 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    this.m_intake_button.whileHeld(new IntakeContinously(this.m_intake));
+    this.m_intake_button.whileHeld(new IntakeContinously(this.m_intake,this.angleFromTargetAntry));
     this.m_indexingLoadButton.whileHeld(new LoadIntoShooter(this.m_indexing_loader));
     this.m_shooterSpinUp.whileHeld(new ShooterSpinUp(this.m_shooter, () -> Shooter.kFallbackShooterSpeed));
     this.m_indexing_spinner_button.whileHeld(new IndexContinuously(this.m_indexing_spinner));
     // this.m_shooting_sequence_button.whileHeld(new ShootingSequence(this.m_indexing_spinner));
-    this.m_shooting_sequence_button.whileHeld(new ActivateShootingSequenceStart(this.m_shooter,this.m_indexing_loader,this.m_chassis,angleFromTargetAntry.getDouble(m_ahrs.getAngle()), m_ahrs));
-    this.m_indexing_spin_one_slot_button.whenReleased(new IndexingReset());
+    // this.m_shooting_sequence_button.whileHeld(new ActivateShootingSequenceStart(this.m_shooter,this.m_indexing_loader,this.m_chassis,angleFromTargetAntry.getDouble(m_ahrs.getAngle()), m_ahrs));
+    this.m_indexing_spin_one_slot_button.whenInactive(new IndexingReset());
     this.m_indexing_spin_one_slot_button.whileHeld(new IndexingSpinForOneSlot(this.m_indexing_spinner));
     // this.m_deploy_intake_button.whileHeld(new ExtendIntake(this.m_intake));
     // this.m_lower_left_arm.whileHeld(new LowerClimb(this.m_climb, false, true));
     // this.m_lower_right_arm.whileHeld(new LowerClimb(this.m_climb, true, false));
     // this.m_climbMax_button.whenPressed(new ClimbMaxHeight(this.m_climb));
-    
+    System.out.println(this.angleFromTargetAntry.getDouble(0));
     //  this.turn_test_button.whenPressed(new TurnByAngle(110, m_ahrs, m_chassis));
   }
 
