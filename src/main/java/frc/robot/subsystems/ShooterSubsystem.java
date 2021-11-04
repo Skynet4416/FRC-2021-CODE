@@ -57,7 +57,12 @@ public class ShooterSubsystem extends SubsystemBase {
         m_pidController.setI(SmartDashboard.getNumber(Shooter.SmartDashboard.ShooterKI, Shooter.PID.kI));
         m_pidController.setD(SmartDashboard.getNumber(Shooter.SmartDashboard.ShooterKD, Shooter.PID.kD));
         m_pidController.setFF(SmartDashboard.getNumber(Shooter.SmartDashboard.ShooterKF, Shooter.PID.kF));
-        
+        System.out.println("P: " +m_pidController.getP() );
+        System.out.println("I: " +m_pidController.getI() );
+        System.out.println("D: " +m_pidController.getD() );
+        System.out.println("F: " +m_pidController.getFF() );
+
+
         SmartDashboard.putNumber("Shooter Output", m_shooterMaster.getAppliedOutput());
         SmartDashboard.putNumber("Shooter Velocity (RPM)", m_encoder.getVelocity());
         SmartDashboard.putNumber("Shooter Current", m_shooterMaster.getOutputCurrent());

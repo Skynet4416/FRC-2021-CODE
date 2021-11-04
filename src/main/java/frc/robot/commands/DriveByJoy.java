@@ -3,6 +3,7 @@ package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Globals;
 import frc.robot.subsystems.ChassisSubsystem;
 
 /**
@@ -33,13 +34,16 @@ public class DriveByJoy extends CommandBase {
 
     @Override
     public void execute() {
-        double left = this.m_left.getAsDouble();
-        left = Math.abs(left) > 0.1 ? left : 0;
-        
-        double right = this.m_right.getAsDouble();
-        right = Math.abs(right) > 0.1 ? right : 0;
+        if (Globals.joysticksControlEnbaled){
+            double left = this.m_left.getAsDouble();
+            left = Math.abs(left) > 0.1 ? left : 0;
+            
+            double right = this.m_right.getAsDouble();
+            right = Math.abs(right) > 0.1 ? right : 0;
+    
+            this.m_chassis.set(left, right);
+        }
 
-        this.m_chassis.set(left, right);
     }
 
     @Override

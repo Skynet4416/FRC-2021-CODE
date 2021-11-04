@@ -22,7 +22,8 @@ public class ShooterSpinUp extends CommandBase {
      * @param shooter  Shooter subsystem.
      * @param supplier Supplier for motor output.
      */
-    public ShooterSpinUp(ShooterSubsystem shooter, DoubleSupplier supplier) {
+    public 
+    ShooterSpinUp(ShooterSubsystem shooter, DoubleSupplier supplier) {
         this.addRequirements(shooter);
         this.m_shooter = shooter;
         this.m_supplier = supplier;
@@ -30,7 +31,8 @@ public class ShooterSpinUp extends CommandBase {
 
     @Override
     public void initialize() {
-        this.m_shooter.setPID(SmartDashboard.getNumber(Shooter.SmartDashboard.ShooterSetpoint, 0));
+        this.m_shooter.setPID(SmartDashboard.getNumber(Shooter.SmartDashboard.ShooterSetpoint, 5000
+    ));
         // this.m_shooter.setManual(1);
     }
 

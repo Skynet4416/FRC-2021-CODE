@@ -16,8 +16,8 @@ package frc.robot;
  */
 public final class Constants {
     public class Chassis {
-        public final static double kThershold = 10;
-        public final static double kTurnPowerPrecentage = 0.2;
+        public final static double kThershold = 2;
+        public final static double kTurnPowerPrecentage = 0.1;
 
         public class Motors {
             public static final int kMasterLeft = 11;
@@ -44,8 +44,9 @@ public final class Constants {
 
     public class Indexing {
         public static final double kSpinSpeed = 0.2;
+        public static final double KSuperSpeed = 0.2;
         public static final double kLoadingSpeed = 1;
-        public static final int kTimeLimitSeconds = 500;
+        public static final int kTimeLimitSeconds = 412;
 
         public class Motors {
             public static final int kSpinner = 30;
@@ -75,8 +76,8 @@ public final class Constants {
         public class PID {
             public static final double kP = 0.00003;
             public static final double kI = 0.00000003;
-            public static final double kD = 0.00000003;
-            public static final double kF = 0.000179;
+            public static final double kD = 0.03;
+            public static final double kF = 0.000173;
             public static final double kIZone = 3000;
         }
 

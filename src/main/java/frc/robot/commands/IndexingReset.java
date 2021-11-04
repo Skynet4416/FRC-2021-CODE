@@ -8,13 +8,7 @@ public class IndexingReset extends CommandBase {
     //     System.out.println("constructor");
     // }
     @Override
-    public void initialize() {
-        System.out.println("Initialized");
-        Globals.released = true;
-        end(true);
-    }
-    @Override
     public void end(boolean interrupted) {
-        System.out.println("END");
+        Globals.released = true;
     }
 }

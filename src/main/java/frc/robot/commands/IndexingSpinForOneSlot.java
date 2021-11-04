@@ -18,7 +18,7 @@ public class IndexingSpinForOneSlot extends CommandBase {
         if(Globals.released){
             Globals.released = false;
             IndexingSpinForOneSlot._start_time = LocalTime.now();
-            this.m_indexing.setSpinner(Constants.Indexing.kSpinSpeed);
+            this.m_indexing.setSpinner(Constants.Indexing.KSuperSpeed);
         }
 
     }
