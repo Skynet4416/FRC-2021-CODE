@@ -31,8 +31,7 @@ public class ShooterSpinUp extends CommandBase {
 
     @Override
     public void initialize() {
-        this.m_shooter.setPID(SmartDashboard.getNumber(Shooter.SmartDashboard.ShooterSetpoint, 5000
-    ));
+        this.m_shooter.setPID(SmartDashboard.getNumber(Shooter.SmartDashboard.ShooterSetpoint, 5000));
         // this.m_shooter.setManual(1);
     }
 

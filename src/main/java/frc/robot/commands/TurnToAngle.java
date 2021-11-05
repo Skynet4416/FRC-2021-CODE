@@ -5,7 +5,7 @@ import frc.robot.Constants;
 import frc.robot.Globals;
 import frc.robot.subsystems.ChassisSubsystem;
 import com.kauailabs.navx.frc.AHRS;
-
+import frc.robot.Meth_tools.MethTools;
 // DISCLAIMER: this doesn't have PID Controller, tho it needs it
 
 public class TurnToAngle extends CommandBase{
@@ -25,20 +25,16 @@ public class TurnToAngle extends CommandBase{
         this.angle = angle;
         
     }
-    public double PController(){
-        double currentAngle = Math.abs(this.targetAngle - this.ahrs.getAngle());
-        double startDiff = Math.abs((angle - 90));
-        return Math.min(0.2,Math.max(Constants.Chassis.kTurnPowerPrecentage *(currentAngle/startDiff),0.125));
-    }
+
     @Override
     public void initialize(){
         this.targetAngle = angle - 90 + this.ahrs.getAngle(); // the target angle based on the real world( ahrs.getAngle() )
 
         Globals.joysticksControlEnbaled = false;
         if(angle > 90){ // left
-            this.chassis.set(-PController(), PController());
+            this.chassis.set(-MethTools.PController(this.targetAngle,this.ahrs.getAngle(),Constants.Chassis.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax), MethTools.PController(this.targetAngle,this.ahrs.getAngle(),Constants.Chassis.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax));
         } else { // right
-            this.chassis.set(PController(), -PController());
+            this.chassis.set(MethTools.PController(this.targetAngle,this.ahrs.getAngle(),Constants.Chassis.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax), -MethTools.PController(this.targetAngle,this.ahrs.getAngle(),Constants.Chassis.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax));
         }
         
     }
@@ -46,11 +42,11 @@ public class TurnToAngle extends CommandBase{
     @Override
     public boolean isFinished(){
         if(angle > 90){ // left
-            this.chassis.set(-PController(), PController());
+            this.chassis.set(-MethTools.PController(this.targetAngle,this.ahrs.getAngle(),Constants.Chassis.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax), MethTools.PController(this.targetAngle,this.ahrs.getAngle(),Constants.Chassis.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax));
         } else { // right
-            this.chassis.set(PController(), -PController());
+            this.chassis.set(MethTools.PController(this.targetAngle,this.ahrs.getAngle(),Constants.Chassis.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax), -MethTools.PController(this.targetAngle,this.ahrs.getAngle(),Constants.Chassis.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax));
         }
-        System.out.println(Math.abs(this.targetAngle - this.ahrs.getAngle()) + " / " + Math.abs((angle - 90)) + " = " + Math.abs(this.targetAngle - this.ahrs.getAngle()) / Math.abs((angle - 90)) + " , " + PController());
+        System.out.println(Math.abs(this.targetAngle - this.ahrs.getAngle()) + " / " + Math.abs((angle - 90)) + " = " + Math.abs(this.targetAngle - this.ahrs.getAngle()) / Math.abs((angle - 90)) + " , " + MethTools.PController(this.targetAngle,this.ahrs.getAngle(),Constants.Chassis.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax));
         return Math.abs(this.targetAngle - this.ahrs.getAngle()) < Constants.Chassis.kThershold;
     }
 
