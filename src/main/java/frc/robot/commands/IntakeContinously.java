@@ -26,12 +26,10 @@ public class IntakeContinously extends CommandBase {
     @Override
     public void initialize() {
         this.intake.setIntake(Constants.Intake.IntakeContinously.kSpeed);
-        System.out.println(this.angle.getDouble(0));
     }
 
     @Override
     public boolean isFinished() {
-        System.out.println(this.angle.getDouble(0));
         return false;
     }
 

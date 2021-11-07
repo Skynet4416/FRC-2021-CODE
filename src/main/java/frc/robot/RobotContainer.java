@@ -3,7 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -116,7 +116,17 @@ public class RobotContainer {
     // this.m_lower_left_arm.whileHeld(new LowerClimb(this.m_climb, false, true));
     // this.m_lower_right_arm.whileHeld(new LowerClimb(this.m_climb, true, false));
     // this.m_climbMax_button.whenPressed(new ClimbMaxHeight(this.m_climb));
-    this.turn_test_button.whenPressed(new TurnToAngle( m_chassis,180, m_ahrs));
+    this.turn_test_button.whileHeld(new TurnToAngle( m_chassis,90+Constants.Chassis.testAngle, m_ahrs));
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointAx, 5);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointBx, 5);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointCx, 5);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointDx, 5);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointAy, 0);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointCy, 0);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointBy, 0);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointDy, 0);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.kP, Constants.Chassis.kP);
+
   }
 
   /**

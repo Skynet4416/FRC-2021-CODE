@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Meth_tools.Point;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
@@ -15,12 +18,23 @@ package frc.robot;
  * wherever the constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public class Chassis {
-        public final static double kThershold = 2;
-        public final static double kP = 0.1;
-        public final static double kPmin = 0.125;
-        public final static double kPmax = 0.2;
-
+    public static class Chassis {
+        public final static double kThershold = 0;
+        public final static double kP = 0.4;
+        public final static double kPmin = 0.1;
+        public final static double kPmax = 0.5;
+        public final static double testAngle = 10;
+        public static class SmartDashboard{
+            public static final String TurnAnglePointAx = "Turn Angle Point Ax";
+            public static final String TurnAnglePointAy = "Turn Angle Point Ay";
+            public static final String TurnAnglePointBx = "Turn Angle Point Bx";
+            public static final String TurnAnglePointBy = "Turn Angle Point By";
+            public static final String TurnAnglePointCx = "Turn Angle Point Cx";
+            public static final String TurnAnglePointCy = "Turn Angle Point Cy";
+            public static final String TurnAnglePointDx = "Turn Angle Point Dx";
+            public static final String TurnAnglePointDy = "Turn Angle Point Dy";
+            public static final String kP = "Turn angle Kp";
+        }
 
         public class Motors {
             public static final int kMasterLeft = 11;
