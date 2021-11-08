@@ -5,6 +5,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Globals;
 import frc.robot.subsystems.ChassisSubsystem;
+
+import javax.swing.text.StyleContext.SmallAttributeSet;
+
 import com.kauailabs.navx.frc.AHRS;
 import frc.robot.Meth_tools.MethTools;
 // DISCLAIMER: this doesn't have PID Controller, tho it needs it
@@ -53,7 +56,7 @@ public class TurnToAngle extends CommandBase{
             this.chassis.set(MethTools.PController(this.targetAngle,this.ahrs.getAngle(),this.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax,this.kB), -MethTools.PController(this.targetAngle,this.ahrs.getAngle(),this.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax,this.kB));
         }
         
-        return Math.abs(this.targetAngle - this.ahrs.getAngle()) < Constants.Chassis.kThershold;
+        return Math.abs(this.targetAngle - this.ahrs.getAngle()) <= SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAngleThreshold, 5);
     }
 
     @Override

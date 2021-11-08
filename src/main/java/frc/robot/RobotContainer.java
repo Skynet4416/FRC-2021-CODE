@@ -92,9 +92,22 @@ public class RobotContainer {
 
     // Configure the button bindings
     configureButtonBindings();
-
+    configureSmartDashBoard();
     // Set default commands.
     // m_chassis.setDefaultCommand(new DriveByJoy(m_chassis, m_leftJoy::getY, m_rightJoy::getY));
+  }
+
+  private void configureSmartDashBoard() {
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointAx, 0);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointBx, 0.3333333);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointCx,2* 0.33333333);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointDx, 1);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointAy, 1);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointCy, 1);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointBy, 0.5);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointDy, 0);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.kP, Constants.Chassis.kP);
+    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAngleThreshold, Constants.Chassis.kThershold);
   }
 
   /**
@@ -116,16 +129,8 @@ public class RobotContainer {
     // this.m_lower_left_arm.whileHeld(new LowerClimb(this.m_climb, false, true));
     // this.m_lower_right_arm.whileHeld(new LowerClimb(this.m_climb, true, false));
     // this.m_climbMax_button.whenPressed(new ClimbMaxHeight(this.m_climb));
-    this.turn_test_button.whileHeld(new TurnToAngle( m_chassis,90+Constants.Chassis.testAngle, m_ahrs));
-    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointAx, 5);
-    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointBx, 5);
-    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointCx, 5);
-    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointDx, 5);
-    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointAy, 0);
-    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointCy, 0);
-    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointBy, 0);
-    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.TurnAnglePointDy, 0);
-    SmartDashboard.putNumber(Constants.Chassis.SmartDashboard.kP, Constants.Chassis.kP);
+    this.turn_test_button.whenPressed(new TurnToAngle( m_chassis,90+Constants.Chassis.testAngle, m_ahrs));
+
 
   }
 

@@ -19,7 +19,7 @@ import frc.robot.Meth_tools.Point;
  */
 public final class Constants {
     public static class Chassis {
-        public final static double kThershold = 0;
+        public final static double kThershold = 5;
         public final static double kP = 0.4;
         public final static double kPmin = 0.1;
         public final static double kPmax = 0.5;
@@ -34,6 +34,7 @@ public final class Constants {
             public static final String TurnAnglePointDx = "Turn Angle Point Dx";
             public static final String TurnAnglePointDy = "Turn Angle Point Dy";
             public static final String kP = "Turn angle Kp";
+            public static final String TurnAngleThreshold = "Turn Angle Threshold";
         }
 
         public class Motors {
