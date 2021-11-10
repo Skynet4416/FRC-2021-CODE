@@ -44,8 +44,8 @@ import frc.robot.commands.TurnToAngle;
 public class RobotContainer {
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable visionTable = inst.getTable("Vision");
-  private NetworkTableEntry angleFromTargetAntry = visionTable.getEntry("aaa");
-  private NetworkTableEntry distanceFromTargetAntry = visionTable.getEntry("DistanceFromTarget");
+  private NetworkTableEntry angleFromTargetEntry = visionTable.getEntry("aaa");
+  private NetworkTableEntry distanceFromTargetEntry = visionTable.getEntry("DistanceFromTarget");
   // The robot's subsystems and commands are defined here...
   private final ChassisSubsystem m_chassis = new ChassisSubsystem();
   private final IntakeSubsystem m_intake = new IntakeSubsystem();
@@ -117,7 +117,7 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    this.m_intake_button.whileHeld(new IntakeContinously(this.m_intake,this.angleFromTargetAntry));
+    this.m_intake_button.whileHeld(new IntakeContinously(this.m_intake));
     this.m_indexingLoadButton.whileHeld(new LoadIntoShooter(this.m_indexing_loader));
     // this.m_shooterSpinUp.whileHeld(new ShooterSpinUp(this.m_shooter, () -> Shooter.kFallbackShooterSpeed));
     this.m_indexing_spinner_button.whileHeld(new IndexContinuously(this.m_indexing_spinner));

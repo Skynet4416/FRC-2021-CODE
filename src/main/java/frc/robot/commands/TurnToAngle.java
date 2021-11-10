@@ -1,5 +1,8 @@
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -21,7 +24,7 @@ public class TurnToAngle extends CommandBase{
     private double angle;
     private Point[] kB;
     private double kP;
-
+    private NetworkTableEntry angleFromTargetEntry;
     /**
         @param angle the target angle relative to the robot intial position(90 forward, 0 right etc)
     */
@@ -36,6 +39,10 @@ public class TurnToAngle extends CommandBase{
 
     @Override
     public void initialize(){
+        NetworkTableInstance inst = NetworkTableInstance.getDefault();
+        NetworkTable visionTable = inst.getTable("Vision");
+        this.angleFromTargetEntry = visionTable.getEntry("Angle From Target");
+        this.angle = this.angleFromTargetEntry.getDouble(0);
         // A1 B0.75 C0.5 D0
         this.kB = new Point[] {new Point(SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointAx, 0),SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointAy, 0)),new Point(SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointBx, 0), SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointBy, 0)), new Point(SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointCx, 0), SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointCy, 0)), new Point(SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointDx, 0), SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointDy, 0))};
         this.targetAngle = angle - 90 + this.ahrs.getAngle(); // the target angle based on the real world( ahrs.getAngle() )

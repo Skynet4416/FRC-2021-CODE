@@ -11,15 +11,13 @@ import frc.robot.subsystems.IntakeSubsystem;
  */
 public class IntakeContinously extends CommandBase {
     private IntakeSubsystem intake;
-    private NetworkTableEntry angle;
     /**
      * Creates a new IntakeContinously command.
      * 
      * @param intake intake subsystem.
      */
-    public IntakeContinously(IntakeSubsystem intake,NetworkTableEntry angle) {
+    public IntakeContinously(IntakeSubsystem intake) {
         this.addRequirements(intake);
-        this.angle = angle;
         this.intake = intake;
     }
 
