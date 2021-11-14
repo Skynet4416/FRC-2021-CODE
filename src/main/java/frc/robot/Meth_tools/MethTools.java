@@ -7,7 +7,7 @@ public final class MethTools{
         double retval = Math.min(maxvalue,Math.max(Kp*CubicPValue(1-(currentdiff/startdiff), kB[0],kB[1],kB[2],kB[3]) *(currentdiff/startdiff),minvalue));
         if((currentdiff/startdiff) < 0)
             retval = -1*retval;
-        System.out.println(Kp + " * " + (currentdiff/startdiff) + " * " +CubicPValue(1-(currentdiff/startdiff), kB[0],kB[1],kB[2],kB[3]) + " = " +retval);
+        // System.out.println(Kp + " * " + (currentdiff/startdiff) + " * " +CubicPValue(1-(currentdiff/startdiff), kB[0],kB[1],kB[2],kB[3]) + " = " +retval);
         return retval;
     }
     public static double CubicPValue(double i, Point kA,Point kB,Point kC,Point kD)//dark sourcery source tomer barzeli (0528408878,https://github.com/tomerBARZ, tserver.serverpit.com, 326673191)  

@@ -25,6 +25,8 @@ public class TurnToAngle extends CommandBase{
     private Point[] kB;
     private double kP;
     private NetworkTableEntry angleFromTargetEntry;
+    private double ahrs_angle;
+    private double init_angle;
     /**
         @param angle the target angle relative to the robot intial position(90 forward, 0 right etc)
     */
@@ -34,33 +36,45 @@ public class TurnToAngle extends CommandBase{
         this.targetAngle = angle - 90 + this.ahrs.getAngle(); // the target angle based on the real world( ahrs.getAngle() )
         this.chassis = chassis;
         this.angle = angle;
-        
+        this.ahrs_angle = ahrs.getAngle();
     }
 
     @Override
     public void initialize(){
-        NetworkTableInstance inst = NetworkTableInstance.getDefault();
-        NetworkTable visionTable = inst.getTable("Vision");
-        this.angleFromTargetEntry = visionTable.getEntry("Angle From Target");
-        this.angle = this.angleFromTargetEntry.getDouble(0);
+        
+        // this.ahrs_angle = Math.abs(ahrs.getAngle()%360);
+        this.ahrs_angle = ahrs.getAngle();
+        // NetworkTableInstance inst = NetworkTableInstance.getDefault();
+        // NetworkTable visionTable = inst.getTable("Vision");
+        // this.angleFromTargetEntry = visionTable.getEntry("Angle From Target");
+        // this.angle = this.angleFromTargetEntry.getDouble(0);
+        System.out.println(angle);
         // A1 B0.75 C0.5 D0
         this.kB = new Point[] {new Point(SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointAx, 0),SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointAy, 0)),new Point(SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointBx, 0), SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointBy, 0)), new Point(SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointCx, 0), SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointCy, 0)), new Point(SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointDx, 0), SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointDy, 0))};
-        this.targetAngle = angle - 90 + this.ahrs.getAngle(); // the target angle based on the real world( ahrs.getAngle() )
+        this.targetAngle = angle - 90 + ahrs_angle; // the target angle based on the real world( ahrs.getAngle() )
+        // this.targetAngle = Math.abs(this.targetAngle%360);
         this.kP = SmartDashboard.getNumber(Chassis.SmartDashboard.kP, Chassis.kP);
         Globals.joysticksControlEnbaled = false;
+
+        Double power = MethTools.PController(this.targetAngle,ahrs_angle,this.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax,this.kB);
         if(angle > 90){ // left
-            this.chassis.set(-MethTools.PController(this.targetAngle,this.ahrs.getAngle(),this.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax,this.kB), MethTools.PController(this.targetAngle,this.ahrs.getAngle(),this.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax,this.kB));
-        } else { // right
-            this.chassis.set(MethTools.PController(this.targetAngle,this.ahrs.getAngle(),this.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax,this.kB), -MethTools.PController(this.targetAngle,this.ahrs.getAngle(),this.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax,this.kB));
+            this.chassis.set(-power, power);
+        } 
+        else{ // right
+            this.chassis.set(power, -power);
         }
     }
 
     @Override
     public boolean isFinished(){
+        // this.ahrs_angle = Math.abs(ahrs.getAngle()%360);
+        this.ahrs_angle = ahrs.getAngle();
+        System.out.println("ahrs angle: " + ahrs_angle + " angle got: " + angle + " target angle: " + this.targetAngle);
+        Double power = MethTools.PController(this.targetAngle,ahrs_angle,this.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax,this.kB);
         if(angle > 90){ // left
-            this.chassis.set(-MethTools.PController(this.targetAngle,this.ahrs.getAngle(),this.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax,this.kB), MethTools.PController(this.targetAngle,this.ahrs.getAngle(),this.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax,this.kB));
+           this.chassis.set(-power, power);
         } else { // right
-            this.chassis.set(MethTools.PController(this.targetAngle,this.ahrs.getAngle(),this.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax,this.kB), -MethTools.PController(this.targetAngle,this.ahrs.getAngle(),this.kP,Math.abs((angle - 90)),Constants.Chassis.kPmin,Constants.Chassis.kPmax,this.kB));
+            this.chassis.set(power, -power);
         }
         
         return Math.abs(this.targetAngle - this.ahrs.getAngle()) <= SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAngleThreshold, 5);
