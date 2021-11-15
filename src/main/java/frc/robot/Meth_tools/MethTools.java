@@ -4,10 +4,14 @@ package frc.robot.Meth_tools;
 public final class MethTools{
     public static double PController(double target, double current,double Kp, double startdiff,double minvalue, double maxvalue, Point[] kB){
         double currentdiff = (target - current);
-        double retval = Math.min(maxvalue,Math.max(Kp*CubicPValue(1-(currentdiff/startdiff), kB[0],kB[1],kB[2],kB[3]) *(currentdiff/startdiff),minvalue));
-        if((currentdiff/startdiff) < 0)
-            retval = -1*retval;
-        // System.out.println(Kp + " * " + (currentdiff/startdiff) + " * " +CubicPValue(1-(currentdiff/startdiff), kB[0],kB[1],kB[2],kB[3]) + " = " +retval);
+        if(target < current){
+            maxvalue = -maxvalue;
+            minvalue = -minvalue;
+        }
+        double retval = Math.min(1,Math.max(Kp*(currentdiff/startdiff),-1));
+        // double retval = Math.min(maxvalue,Math.max(Kp*CubicPValue(1-(currentdiff/startdiff), kB[0],kB[1],kB[2],kB[3]) *(currentdiff/startdiff),minvalue));
+        System.out.println(target + " , " + current + " , " + startdiff + " , " + currentdiff);
+        // System.out.println(Kp + " * " + (currentdiff/startdiff) + " * " +CubicPValue(1-Math.abs(currentdiff/startdiff), kB[0],kB[1],kB[2],kB[3]) + " = " +retval);
         return retval;
     }
     public static double CubicPValue(double i, Point kA,Point kB,Point kC,Point kD)//dark sourcery source tomer barzeli (0528408878,https://github.com/tomerBARZ, tserver.serverpit.com, 326673191)  
