@@ -17,10 +17,10 @@ import frc.robot.Constants;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ActivateShootingSequenceStart extends ParallelCommandGroup {
   /** Creates a new ActivateShootingSequenceStart. */
-  public ActivateShootingSequenceStart(ShooterSubsystem shooter, IndexingLoaderSubsytem loader,ChassisSubsystem chassis,double angle, AHRS AHRS) {
+  public ActivateShootingSequenceStart(ShooterSubsystem shooter, IndexingLoaderSubsytem loader,ChassisSubsystem chassis,AHRS AHRS) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ShooterSpinUp(shooter, () -> Constants.Shooter.kFallbackShooterSpeed), new LoadIntoShooter(loader), new TurnToAngle(chassis,angle,AHRS));
+    addCommands(new ShooterSpinUp(shooter, () -> Constants.Shooter.kFallbackShooterSpeed), new LoadIntoShooter(loader), new TurnToAngle(chassis,AHRS));
     
   }
 }

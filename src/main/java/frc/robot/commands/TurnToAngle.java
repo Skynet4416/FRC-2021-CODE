@@ -39,6 +39,12 @@ public class TurnToAngle extends CommandBase{
         
         this.ahrs_angle = ahrs.getAngle();
     }
+    public TurnToAngle(ChassisSubsystem chassis, AHRS ahrs){
+        this.ahrs = ahrs;
+        this.chassis = chassis;
+        
+        this.ahrs_angle = ahrs.getAngle();
+    }
 
     @Override
     public void initialize(){

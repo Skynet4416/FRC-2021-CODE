@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -27,7 +28,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 // import frc.robot.commands.LowerClimb;
 // import frc.robot.commands.ClimbMaxHeight;
 import frc.robot.commands.ShooterSpinUp;
-import frc.robot.commands.TestTurnToAngleWithNormalPID;
+import frc.robot.commands.ShootingSequence;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -95,7 +96,7 @@ public class RobotContainer {
     configureButtonBindings();
     configureSmartDashBoard();
     // Set default commands.
-    // m_chassis.setDefaultCommand(new DriveByJoy(m_chassis, m_leftJoy::getY, m_rightJoy::getY));
+    m_chassis.setDefaultCommand(new DriveByJoy(m_chassis, m_leftJoy::getY, m_rightJoy::getY));
   }
 
   private void configureSmartDashBoard() {
@@ -120,9 +121,9 @@ public class RobotContainer {
   private void configureButtonBindings() {
     this.m_intake_button.whileHeld(new IntakeContinously(this.m_intake));
     this.m_indexingLoadButton.whileHeld(new LoadIntoShooter(this.m_indexing_loader));
-    // this.m_shooterSpinUp.whileHeld(new ShooterSpinUp(this.m_shooter, () -> Shooter.kFallbackShooterSpeed));
+    this.m_shooterSpinUp.whileHeld(new ShooterSpinUp(this.m_shooter, () -> Shooter.kFallbackShooterSpeed));
     this.m_indexing_spinner_button.whileHeld(new IndexContinuously(this.m_indexing_spinner));
-    // this.m_shooting_sequence_button.whileHeld(new ShootingSequence(this.m_indexing_spinner));
+    this.m_shooting_sequence_button.whileHeld(new ShootingSequence(this.m_shooter,this.m_indexing_loader,this.m_chassis, m_ahrs));
     // this.m_shooting_sequence_button.whileHeld(new ActivateShootingSequenceStart(this.m_shooter,this.m_indexing_loader,this.m_chassis,angleFromTargetAntry.getDouble(m_ahrs.getAngle()), m_ahrs));
     this.m_indexing_spin_one_slot_button.whileHeld(new IndexingReset());
     this.m_indexing_spin_one_slot_button.whileHeld(new IndexingSpinForOneSlot(this.m_indexing_spinner));
@@ -130,7 +131,7 @@ public class RobotContainer {
     // this.m_lower_left_arm.whileHeld(new LowerClimb(this.m_climb, false, true));
     // this.m_lower_right_arm.whileHeld(new LowerClimb(this.m_climb, true, false));
     // this.m_climbMax_button.whenPressed(new ClimbMaxHeight(this.m_climb));
-    this.turn_test_button.whenPressed(new TurnToAngle( m_chassis,90+Constants.Chassis.testAngle, m_ahrs));
+    // this.turn_test_button.whenPressed(new TurnToAngle( m_chassis,90+Constants.Chassis.testAngle, m_ahrs));
 
 
   }
