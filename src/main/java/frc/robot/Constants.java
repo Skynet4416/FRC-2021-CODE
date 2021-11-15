@@ -19,8 +19,8 @@ import frc.robot.Meth_tools.Point;
  */
 public final class Constants {
     public static class Chassis {
-        public final static double kThershold = 1;
-        public final static double kP = 0.3;
+        public final static double kThershold = 5;
+        public final static double kP = 0.2;
         public final static double kPmin = 0.1;
         public final static double kPmax = 0.5;
         public final static double testAngle = 30;
