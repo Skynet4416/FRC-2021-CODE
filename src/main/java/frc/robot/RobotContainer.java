@@ -81,10 +81,7 @@ public class RobotContainer {
 
   private final JoystickButton m_indexing_spinner_button = new JoystickButton(m_systemsController, XboxController.Button.kY.value);
   private final JoystickButton m_shooting_sequence_button = new JoystickButton(m_systemsController, XboxController.Button.kBumperRight.value);
-  private final JoystickButton m_indexing_spin_one_slot_button = new JoystickButton(m_systemsController,XboxController.Button.kBumperLeft.value);
-  private final JoystickButton turn_test_button = new JoystickButton(m_systemsController,
-      XboxController.Button.kX.value);
-  
+  private final JoystickButton m_indexing_spin_one_slot_button = new JoystickButton(m_systemsController,XboxController.Button.kBumperLeft.value);s
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -131,7 +128,6 @@ public class RobotContainer {
     // this.m_lower_left_arm.whileHeld(new LowerClimb(this.m_climb, false, true));
     // this.m_lower_right_arm.whileHeld(new LowerClimb(this.m_climb, true, false));
     // this.m_climbMax_button.whenPressed(new ClimbMaxHeight(this.m_climb));
-    // this.turn_test_button.whenPressed(new TurnToAngle( m_chassis,90+Constants.Chassis.testAngle, m_ahrs));
 
 
   }

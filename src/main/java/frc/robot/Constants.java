@@ -23,7 +23,6 @@ public final class Constants {
         public final static double kP = 0.2;
         public final static double kPmin = 0.1;
         public final static double kPmax = 0.5;
-        public final static double testAngle = 30;
         public static class SmartDashboard{
             public static final String TurnAnglePointAx = "Turn Angle Point Ax";
             public static final String TurnAnglePointAy = "Turn Angle Point Ay";
