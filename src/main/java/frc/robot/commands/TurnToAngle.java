@@ -34,6 +34,7 @@ public class TurnToAngle extends CommandBase{
         this.ahrs = ahrs;
         this.angle = angle;
         this.targetAngle = this.angle - 90 + this.ahrs.getAngle(); // the target angle based on the real world( ahrs.getAngle() )
+        this.angleFromTargetEntry = NetworkTableInstance.getDefault().getTable("Vision").getEntry("Angle From Target"); 
         this.chassis = chassis;
         
         this.ahrs_angle = ahrs.getAngle();
@@ -42,17 +43,14 @@ public class TurnToAngle extends CommandBase{
     public TurnToAngle(ChassisSubsystem chassis, AHRS ahrs){
         this.ahrs = ahrs;
         this.chassis = chassis;
-        
+        this.angleFromTargetEntry = NetworkTableInstance.getDefault().getTable("Vision").getEntry("Angle From Target"); 
         this.ahrs_angle = ahrs.getAngle();
     }
 
     @Override
     public void initialize(){
         this.ahrs_angle = ahrs.getAngle();
-        NetworkTableInstance inst = NetworkTableInstance.getDefault();
-        NetworkTable visionTable = inst.getTable("Vision");
-        this.angle = visionTable.getEntry("Angle From Target").getDouble(0);
-
+        this.angle = angleFromTargetEntry.getDouble(0);
         // A1 B0.75 C0.5 D0
         this.kB = new Point[] {new Point(SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointAx, 0),SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointAy, 0)),new Point(SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointBx, 0), SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointBy, 0)), new Point(SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointCx, 0), SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointCy, 0)), new Point(SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointDx, 0), SmartDashboard.getNumber(Chassis.SmartDashboard.TurnAnglePointDy, 0))};
         this.targetAngle = angle - 90 + ahrs_angle; // the target angle based on the real world( ahrs.getAngle() )
