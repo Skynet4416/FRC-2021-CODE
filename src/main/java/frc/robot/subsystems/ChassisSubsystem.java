@@ -16,7 +16,7 @@ public class ChassisSubsystem extends SubsystemBase {
     private TalonSRX _rightSlave = new TalonSRX(Constants.Chassis.Motors.kSlaveRight);
     private TalonSRX _leftMaster = new TalonSRX(Constants.Chassis.Motors.kMasterLeft);
     private TalonSRX _leftSlave = new TalonSRX(Constants.Chassis.Motors.kSlaveLeft);
-
+    
     /**
      * Creates the subsystem and configures motor controllers.
      */
