@@ -9,19 +9,19 @@ import frc.robot.subsystems.ChassisSubsystem;
 /**
  * Command responsible for using 1 joysticks to drive the robot.
  */
-public class DriveBySingleJoy extends CommandBase {
+public class DriveBySingleJoyTwist extends CommandBase {
     private ChassisSubsystem m_chassis;
     private DoubleSupplier m_axis;
     private DoubleSupplier m_rotation;
 
     /**
-     * Creates a new DriveBySingleJoy command.
+     * Creates a new DriveBySingleJoyTwist command.
      * 
      * @param chassis Chassis subsystem.
      * @param left    Supplier for the motors output.
      * @param rotation   Supplier for rotation.
      */
-    public DriveBySingleJoy(ChassisSubsystem chassis, DoubleSupplier axis, DoubleSupplier rotation) {
+    public DriveBySingleJoyTwist(ChassisSubsystem chassis, DoubleSupplier axis, DoubleSupplier rotation) {
         this.addRequirements(chassis);
         this.m_chassis = chassis;
         this.m_axis = axis;

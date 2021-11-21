@@ -84,7 +84,13 @@ public final class Constants {
         public static final int kRightJoy = 1;
         public static final int kSystemsController = 0;
 
-        public static final String drivingControllerScheme = "TwoJoy"; // alterantive: SingleJoy
+        
+        /* available modes:
+         SingleJoyTwist
+         SingleJoyXY
+         TwoJoy
+        */
+        public static final String drivingControllerScheme = "TwoJoy";
     }
 
     public class Shooter {

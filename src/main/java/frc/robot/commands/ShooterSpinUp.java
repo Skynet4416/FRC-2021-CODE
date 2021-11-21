@@ -30,9 +30,14 @@ public class ShooterSpinUp extends CommandBase {
         this.m_shooter = shooter;
         this.m_supplier = supplier;
         }
+    public ShooterSpingUp(ShooterSubsystem shooter)
+    {
+        this.m_shooter = shooter;   
+        this.distanceFromTargetEntry = NetworkTableInstance.getDefault().getTable("Vision").getEntry("Distance From Target"); 
+    }
     public double calculateSpeed()
     {
-        return 1;
+        this.targetSpeed = 200 * distanceFromTargetEntry.getDouble(0) + 3500;
     }
     @Override
     public void initialize() {

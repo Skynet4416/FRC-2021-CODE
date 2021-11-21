@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.Shooter;
 import frc.robot.commands.ActivateShootingSequenceStart;
 import frc.robot.commands.DriveByJoy;
-import frc.robot.commands.DriveBySingleJoy;
+import frc.robot.commands.DriveBySingleJoyTwist;
+import frc.robot.commands.DriveBySingleJoyXY;
 // import frc.robot.commands.ExtendIntake;
 import frc.robot.commands.IndexContinuously;
 import frc.robot.commands.IndexingReset;
@@ -93,11 +94,20 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     configureSmartDashBoard();
+
     // Set default commands.
-    if(Constants.Controls.drivingControllerScheme == "TwoJoy")
-      m_chassis.setDefaultCommand(new DriveByJoy(m_chassis, m_leftJoy::getY, m_rightJoy::getY));
-    else if(Constants.Controls.drivingControllerScheme == "SingleJoy")
-      m_chassis.setDefaultCommand(new DriveBySingleJoy(m_chassis, m_leftJoy::getY, m_leftJoy::getTwist));
+    switch (Constants.Controls.drivingControllerScheme) {
+      case "SingleJoyTwist":
+        m_chassis.setDefaultCommand(new DriveBySingleJoyTwist(m_chassis, m_leftJoy::getY, m_leftJoy::getTwist));
+        break;
+      case "SingleJoyXY":
+        m_chassis.setDefaultCommand(new DriveBySingleJoyXY(m_chassis, m_leftJoy::getX, m_leftJoy::getY));
+        break;
+      case "TwoJoy":
+        m_chassis.setDefaultCommand(new DriveByJoy(m_chassis, m_leftJoy::getY, m_rightJoy::getY));
+        break;
+
+    }
   }
 
   private void configureSmartDashBoard() {
