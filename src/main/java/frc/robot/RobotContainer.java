@@ -101,8 +101,11 @@ public class RobotContainer {
         m_chassis.setDefaultCommand(new DriveBySingleJoyTwist(m_chassis, m_leftJoy::getY, m_leftJoy::getTwist));
         break;
       case "SingleJoyXY":
-        m_chassis.setDefaultCommand(new DriveBySingleJoyXY(m_chassis, m_leftJoy::getX, m_leftJoy::getY));
+        m_chassis.setDefaultCommand(new DriveBySingleJoyXY(m_chassis, m_leftJoy::getX, m_leftJoy::getY, m_leftJoy::getThrottle));
         break;
+      // case "SingleJoyControllerXY":
+      //   m_chassis.setDefaultCommand(new DriveBySingleJoyXY(m_chassis, XboxController.Axis.kLeftX. m_leftJoy::getY))
+      //   break;
       case "TwoJoy":
         m_chassis.setDefaultCommand(new DriveByJoy(m_chassis, m_leftJoy::getY, m_rightJoy::getY));
         break;
