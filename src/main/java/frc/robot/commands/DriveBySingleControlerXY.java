@@ -10,7 +10,7 @@ import frc.robot.subsystems.ChassisSubsystem;
 /**
  * Command responsible for using 1 joysticks to drive the robot using X and Y.
  */
-public class DriveBySingleJoyXY extends CommandBase {
+public class DriveBySingleControlerXY extends CommandBase {
     private ChassisSubsystem m_chassis;
     private DoubleSupplier m_X;
     private DoubleSupplier m_Y;
@@ -24,7 +24,7 @@ public class DriveBySingleJoyXY extends CommandBase {
      * @param Y   Supplier for the Y input.
      * @param limiter Supplier for the throutle
      */
-    public DriveBySingleJoyXY(ChassisSubsystem chassis, DoubleSupplier X, DoubleSupplier Y, DoubleSupplier limiter) {
+    public DriveBySingleControlerXY(ChassisSubsystem chassis, DoubleSupplier X, DoubleSupplier Y, DoubleSupplier limiter) {
         this.addRequirements(chassis);
         this.m_chassis = chassis;
         this.m_X = X;
@@ -32,8 +32,7 @@ public class DriveBySingleJoyXY extends CommandBase {
         this.m_limiter = limiter;
     }
 
-    // with out limiter
-    public DriveBySingleJoyXY(ChassisSubsystem chassis, DoubleSupplier X, DoubleSupplier Y) {
+    public DriveBySingleControlerXY(ChassisSubsystem chassis, DoubleSupplier X, DoubleSupplier Y) {
         this.addRequirements(chassis);
         this.m_chassis = chassis;
         this.m_X = X;
@@ -42,7 +41,7 @@ public class DriveBySingleJoyXY extends CommandBase {
     }
 
     private double defaultLimiter() {
-        return 0;
+        return -1;
     }
 
     @Override

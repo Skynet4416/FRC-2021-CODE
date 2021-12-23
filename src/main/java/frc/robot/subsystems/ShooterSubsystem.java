@@ -70,9 +70,11 @@ public class ShooterSubsystem extends SubsystemBase {
      * @param rpm
      */
     public void setPID(double rpm) {
+        if (rpm>0 && rpm <5500)
+        {
         m_pidController.setIAccum(0);
         m_pidController.setReference(rpm, ControlType.kVelocity);
-    }
+    }}
     /**
      * set power by speed
      * @param speed

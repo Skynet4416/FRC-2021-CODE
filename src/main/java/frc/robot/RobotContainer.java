@@ -11,11 +11,15 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.Constants.Shooter;
 import frc.robot.commands.ActivateShootingSequenceStart;
+import frc.robot.commands.DriveArcadeController;
 import frc.robot.commands.DriveByJoy;
+import frc.robot.commands.DriveBySingleControlerXY;
 import frc.robot.commands.DriveBySingleJoyTwist;
 import frc.robot.commands.DriveBySingleJoyXY;
+import frc.robot.commands.FinishTurnToAngle;
 // import frc.robot.commands.ExtendIntake;
 import frc.robot.commands.IndexContinuously;
 import frc.robot.commands.IndexingReset;
@@ -37,7 +41,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import frc.robot.commands.TurnToAngle;
-
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 /**
  * This class is where the bulk of the robot should be declared. Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -46,6 +50,7 @@ import frc.robot.commands.TurnToAngle;
  * commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  private PowerDistributionPanel pdp = new PowerDistributionPanel(0);
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable visionTable = inst.getTable("Vision");
   private NetworkTableEntry angleFromTargetEntry = visionTable.getEntry("aaa");
@@ -80,7 +85,7 @@ public class RobotContainer {
   //     XboxController.Button.kBumperRight.value);
   // private final JoystickButton m_climbMax_button = new JoystickButton(m_systemsController,
   //     XboxController.Button.kY.value);
-
+  private final JoystickButton m_turn_to_angle_button = new JoystickButton(m_systemsController, XboxController.Button.kB.value);
   private final JoystickButton m_indexing_spinner_button = new JoystickButton(m_systemsController, XboxController.Button.kY.value);
   private final JoystickButton m_shooting_sequence_button = new JoystickButton(m_systemsController, XboxController.Button.kBumperRight.value);
   private final JoystickButton m_indexing_spin_one_slot_button = new JoystickButton(m_systemsController,XboxController.Button.kBumperLeft.value);
@@ -103,11 +108,14 @@ public class RobotContainer {
       case "SingleJoyXY":
         m_chassis.setDefaultCommand(new DriveBySingleJoyXY(m_chassis, m_leftJoy::getX, m_leftJoy::getY, m_leftJoy::getThrottle));
         break;
-      // case "SingleJoyControllerXY":
-      //   m_chassis.setDefaultCommand(new DriveBySingleJoyXY(m_chassis, XboxController.Axis.kLeftX. m_leftJoy::getY))
-      //   break;
+      case "SingleJoyControllerXY":
+        m_chassis.setDefaultCommand(new DriveBySingleControlerXY(m_chassis, m_systemsController::getX, m_systemsController::getY));
+        break;
       case "TwoJoy":
         m_chassis.setDefaultCommand(new DriveByJoy(m_chassis, m_leftJoy::getY, m_rightJoy::getY));
+        break;
+      case "ArcadeController":
+        m_chassis.setDefaultCommand(new DriveArcadeController(m_chassis, m_systemsController));
         break;
 
     }
@@ -135,16 +143,19 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     this.m_intake_button.whileHeld(new IntakeContinously(this.m_intake));
-    this.m_indexingLoadButton.whileHeld(new LoadIntoShooter(this.m_indexing_loader));
+    // this.m_indexingLoadButton.whileHeld(new LoadIntoShooter(this.m_indexing_loader));
     this.m_shooterSpinUp.whileHeld(new ShooterSpinUp(this.m_shooter, () -> Shooter.kFallbackShooterSpeed));
     this.m_indexing_spinner_button.whileHeld(new IndexContinuously(this.m_indexing_spinner));
-    // this.m_shooting_sequence_button.whileHeld(new ActivateShootingSequenceStart(this.m_shooter,this.m_indexing_loader,this.m_chassis,angleFromTargetAntry.getDouble(m_ahrs.getAngle()), m_ahrs));
+    this.m_shooting_sequence_button.whileHeld(new ShootingSequence(m_shooter, m_indexing_loader, m_chassis, m_ahrs));
     this.m_indexing_spin_one_slot_button.whileHeld(new IndexingReset());
     this.m_indexing_spin_one_slot_button.whileHeld(new IndexingSpinForOneSlot(this.m_indexing_spinner));
+    this.m_shooting_sequence_button.whileHeld(new FinishTurnToAngle());
     // this.m_deploy_intake_button.whileHeld(new ExtendIntake(this.m_intake));
     // this.m_lower_left_arm.whileHeld(new LowerClimb(this.m_climb, false, true));
     // this.m_lower_right_arm.whileHeld(new LowerClimb(this.m_climb, true, false));
     // this.m_climbMax_button.whenPressed(new ClimbMaxHeight(this.m_climb));
+    this.m_turn_to_angle_button.whenPressed(new TurnToAngle(this.m_chassis, this.m_ahrs));
+    // this.m_turn_to_angle_button.whenReleased(new FinishTurnToAngle());
   }
 
   /**

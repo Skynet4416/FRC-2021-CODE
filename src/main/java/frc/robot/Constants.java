@@ -19,7 +19,7 @@ import frc.robot.Meth_tools.Point;
  */
 public final class Constants {
     public static class Chassis {
-        public final static double kThershold = 5;
+        public final static double kThershold = 1;
         public final static double kP = 0.2;
         public final static double kPmin = 0.1;
         public final static double kPmax = 0.5;
@@ -54,7 +54,7 @@ public final class Constants {
         }
 
         public class IntakeContinously {
-            public static final double kSpeed = 0.55;
+            public static final double kSpeed = 0.65;
         }
     }
   
@@ -62,7 +62,7 @@ public final class Constants {
     public class Indexing {
         public static final double kSpinSpeed = 0.2;
         public static final double KSuperSpeed = 0.2;
-        public static final double kLoadingSpeed = 1;
+        public static final double kLoadingSpeed = 0.5;
         public static final int kTimeLimitSeconds = 412;
 
         public class Motors {
@@ -80,29 +80,33 @@ public final class Constants {
     }
 
     public class Controls {
-        public static final int kLeftJoy = 2;
-        public static final int kRightJoy = 1;
+        public static final int kLeftJoy = 1;
+        public static final int kRightJoy = 2
+;
         public static final int kSystemsController = 0;
 
         
         /* available modes:
          SingleJoyTwist
          SingleJoyXY
+         SingleJoyControllerXY
          TwoJoy
+         ArcadeController
         */
-        public static final String drivingControllerScheme = "SingleJoyXY";
+        public static final String drivingControllerScheme = "ArcadeController";
     }
 
     public class Shooter {
+        public static final double angle = 41;
         public static final int kShooterMaster = 41;
         public static final int kShooterSlave = 42;
         public static final double kFallbackShooterSpeed = 1;
 
         public class PID {
-            public static final double kP = 0.00003;
-            public static final double kI = 0.00000003;
-            public static final double kD = 0.03;
-            public static final double kF = 0.000173;
+            public static final double kP = 0.000031;
+            public static final double kI = 0.00000000;
+            public static final double kD = 1;
+            public static final double kF = 0.000182;
             public static final double kIZone = 3000;
         }
 

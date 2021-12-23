@@ -4,10 +4,14 @@ import java.util.function.DoubleSupplier;
 // import java.util.function.Function;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Constants.Shooter;
+import frc.robot.Meth_tools.MethTools;
 // import frc.robot.subsystems.ChassisSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 // import jdk.nashorn.internal.ir.FunctionCall;
@@ -29,20 +33,23 @@ public class ShooterSpinUp extends CommandBase {
         this.addRequirements(shooter);
         this.m_shooter = shooter;
         this.m_supplier = supplier;
+        this.distanceFromTargetEntry = NetworkTableInstance.getDefault().getTable("Vision").getEntry("Distance From Target"); 
         }
     public ShooterSpinUp(ShooterSubsystem shooter)
     {
         this.m_shooter = shooter;   
         this.distanceFromTargetEntry = NetworkTableInstance.getDefault().getTable("Vision").getEntry("Distance From Target"); 
     }
-    // public double calculateSpeed()
-    // {
-    //     this.targetSpeed = 200 * distanceFromTargetEntry.getDouble(0) + 3500;
-    // }
+    public double calculateSpeed()
+    {
+        // return MethTools.GetShooterSpeed(distanceFromTargetEntry.getDouble(0));
+        return 333.33 * distanceFromTargetEntry.getDouble(0) + 3650;
+    }
     @Override
     public void initialize() {
-        
-        this.m_shooter.setPID(SmartDashboard.getNumber(Shooter.SmartDashboard.ShooterSetpoint, 4000));
+        System.out.println("hi");
+        // this.m_shooter.setPID(SmartDashboard.getNumber(Constants.Shooter.SmartDashboard.ShooterSetpoint, 0));
+        this.m_shooter.setPID(calculateSpeed());
         // this.m_shooter.setManual(1);
     }
 
@@ -53,7 +60,7 @@ public class ShooterSpinUp extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        this.m_shooter.setPID(0);
-        // this.m_shooter.setManual(0);
+        // this.m_shooter.setPID(0);
+        this.m_shooter.setManual(0);
     }
 }

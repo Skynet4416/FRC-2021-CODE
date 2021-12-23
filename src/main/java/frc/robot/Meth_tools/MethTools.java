@@ -1,5 +1,6 @@
 package frc.robot.Meth_tools;
 
+import frc.robot.Constants;
 
 public final class MethTools{
     public static double PController(double target, double current,double Kp, double startdiff,double minvalue, double maxvalue, Point[] kB){
@@ -9,8 +10,12 @@ public final class MethTools{
             minvalue = -minvalue;
         }
         double retval = Math.min(1,Math.max(Kp*(currentdiff/startdiff),-1));
+        if(retval > 0)
+            retval = Math.max(0.12,Math.abs(retval));
+        else
+            retval = -Math.max(0.12,Math.abs(retval));
         // double retval = Math.min(maxvalue,Math.max(Kp*CubicPValue(1-(currentdiff/startdiff), kB[0],kB[1],kB[2],kB[3]) *(currentdiff/startdiff),minvalue));
-        System.out.println(target + " , " + current + " , " + startdiff + " , " + currentdiff);
+        // System.out.println(target + " , " + current + " , " + startdiff + " , " + currentdiff +" , " + retval);
         // System.out.println(Kp + " * " + (currentdiff/startdiff) + " * " +CubicPValue(1-Math.abs(currentdiff/startdiff), kB[0],kB[1],kB[2],kB[3]) + " = " +retval);
         return retval;
     }
@@ -27,6 +32,17 @@ public final class MethTools{
         //level3
         Point level3Point1 = new Point(i+level2Point1.x,((level2Point1.y-level2Point2.y)/(level2Point1.x-level2Point2.x))*i+level2Point1.y);
         return level3Point1.y;
+    }
+    public static double GetShooterSpeed(double distance)
+    {
+        double angle = Constants.Shooter.angle;
+        double rads = Math.toRadians(angle);
+        double stright_line_distance = distance * Math.cos(rads);
+        double hight = distance * Math.cos(rads)-0.54;
+        double speed = 60*Math.sqrt((9.8*Math.pow(stright_line_distance,2))/(Math.sin(2*rads)*stright_line_distance - 2*Math.pow(Math.cos(rads),2)*hight)) / (Math.PI*2*0.14);
+        System.out.println(speed);
+
+        return speed;
     }
      
 }

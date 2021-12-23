@@ -40,6 +40,8 @@ public class DriveByJoy extends CommandBase {
             
             double right = this.m_right.getAsDouble();
             right = Math.abs(right) > 0.1 ? right : 0;
+
+            System.out.println(left + " " + right);
     
             this.m_chassis.set(left, right);
         }

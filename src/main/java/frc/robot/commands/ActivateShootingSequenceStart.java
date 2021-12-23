@@ -20,7 +20,7 @@ public class ActivateShootingSequenceStart extends ParallelCommandGroup {
   public ActivateShootingSequenceStart(ShooterSubsystem shooter, IndexingLoaderSubsytem loader,ChassisSubsystem chassis,AHRS AHRS) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ShooterSpinUp(shooter, () -> Constants.Shooter.kFallbackShooterSpeed), new LoadIntoShooter(loader), new TurnToAngle(chassis,AHRS));
+    addCommands(new ShooterSpinUp(shooter, () -> Constants.Shooter.kFallbackShooterSpeed), new LoadIntoShooter(loader));
     
   }
 }
