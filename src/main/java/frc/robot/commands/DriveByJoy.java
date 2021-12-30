@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -13,6 +14,7 @@ public class DriveByJoy extends CommandBase {
     private ChassisSubsystem m_chassis;
     private DoubleSupplier m_left;
     private DoubleSupplier m_right;
+    private BooleanSupplier m_straight;
 
     /**
      * Creates a new DriveByJoy command.
@@ -21,11 +23,12 @@ public class DriveByJoy extends CommandBase {
      * @param left    Supplier for left motor output.
      * @param right   Supplier for right motor output.
      */
-    public DriveByJoy(ChassisSubsystem chassis, DoubleSupplier left, DoubleSupplier right) {
+    public DriveByJoy(ChassisSubsystem chassis, DoubleSupplier left, DoubleSupplier right, BooleanSupplier straight) {
         this.addRequirements(chassis);
         this.m_chassis = chassis;
         this.m_left = left;
         this.m_right = right;
+        this.m_straight = straight;
     }
 
     @Override
@@ -36,14 +39,19 @@ public class DriveByJoy extends CommandBase {
     public void execute() {
         if (Globals.joysticksControlEnbaled){
             double left = this.m_left.getAsDouble();
-            left = Math.abs(left) > 0.1 ? left : 0;
+            left = Math.abs(left) > 0.15 ? left : 0;
             
             double right = this.m_right.getAsDouble();
-            right = Math.abs(right) > 0.1 ? right : 0;
+            right = Math.abs(right) > 0.15 ? right : 0;
 
-            System.out.println(left + " " + right);
+            if(m_straight.getAsBoolean()){
+                double avg = (left + right) / 2;
+                left = avg;
+                right = avg;
+            }
     
             this.m_chassis.set(left, right);
+
         }
 
     }

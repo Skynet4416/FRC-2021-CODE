@@ -38,6 +38,9 @@ import frc.robot.commands.ShootingSequence;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
+import java.util.function.BooleanSupplier;
+
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import frc.robot.commands.TurnToAngle;
@@ -100,6 +103,7 @@ public class RobotContainer {
     configureButtonBindings();
     configureSmartDashBoard();
 
+
     // Set default commands.
     switch (Constants.Controls.drivingControllerScheme) {
       case "SingleJoyTwist":
@@ -112,13 +116,18 @@ public class RobotContainer {
         m_chassis.setDefaultCommand(new DriveBySingleControlerXY(m_chassis, m_systemsController::getX, m_systemsController::getY));
         break;
       case "TwoJoy":
-        m_chassis.setDefaultCommand(new DriveByJoy(m_chassis, m_leftJoy::getY, m_rightJoy::getY));
+        BooleanSupplier triggerOr = () -> m_leftJoy.getTrigger() || m_rightJoy.getTrigger();
+        m_chassis.setDefaultCommand(new DriveByJoy(m_chassis, m_leftJoy::getY, m_rightJoy::getY, triggerOr));
         break;
       case "ArcadeController":
         m_chassis.setDefaultCommand(new DriveArcadeController(m_chassis, m_systemsController));
         break;
 
     }
+  }
+
+  private boolean joyTriggerOr(){
+    return m_leftJoy.getTrigger() || m_rightJoy.getTrigger();
   }
 
   private void configureSmartDashBoard() {
