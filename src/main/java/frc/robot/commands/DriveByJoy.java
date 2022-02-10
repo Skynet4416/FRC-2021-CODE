@@ -39,16 +39,21 @@ public class DriveByJoy extends CommandBase {
     public void execute() {
         if (Globals.joysticksControlEnbaled){
             double left = this.m_left.getAsDouble();
-            left = Math.abs(left) > 0.15 ? left : 0;
-            
             double right = this.m_right.getAsDouble();
-            right = Math.abs(right) > 0.15 ? right : 0;
+            
+
+
+            left = Math.abs(left) > 0.2 ? left : 0;
+            right = Math.abs(right) > 0.2 ? right : 0;
+
+
 
             if(m_straight.getAsBoolean()){
                 double avg = (left + right) / 2;
                 left = avg;
                 right = avg;
             }
+
     
             this.m_chassis.set(left, right);
 

@@ -93,7 +93,7 @@ public final class Constants {
          TwoJoy
          ArcadeController
         */
-        public static final String drivingControllerScheme = "TwoJoy";
+        public static final String drivingControllerScheme = "ArcadeController";
     }
 
     public class Shooter {

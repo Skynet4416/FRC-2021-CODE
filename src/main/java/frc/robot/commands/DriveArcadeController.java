@@ -38,12 +38,39 @@ public class DriveArcadeController extends CommandBase {
     @Override
     public void execute() {
         if (Globals.joysticksControlEnbaled){
-            double x = m_controller.getX(Hand.kLeft);
-            double y = m_controller.getY(Hand.kLeft);
-            x = Math.abs(x) * x;
-            y = Math.abs(y) * y;
-            
-            m_chassis.set(y + x, y - x);
+            // double l_trigger = m_controller.getTriggerAxis(Hand.kLeft);
+            // double r_trigger = m_controller.getTriggerAxis(Hand.kRight);
+            // double turn = m_controller.getX(Hand.kRight);
+
+            // if(l_trigger >= r_trigger) {
+            //     if(Math.abs(l_trigger) > 0.1){
+            //         if(Math.abs(turn) > 0.1){
+            //             double val = (turn > 0 ? 1 : -1) * l_trigger;
+            //             m_chassis.set(val, -val);
+            //         }else{
+            //             m_chassis.set(l_trigger, l_trigger);
+            //         }
+            //     }else {
+            //         m_chassis.set(0, 0);
+            //     }
+            // } else {
+            //     if(Math.abs(r_trigger) > 0.1){
+            //         if(Math.abs(turn) > 0.1){
+            //             double val = (turn > 0 ? 1 : -1) * r_trigger;
+            //             m_chassis.set(-val, val);
+            //         }else{
+            //             m_chassis.set(-r_trigger, -r_trigger);
+            //         }
+            //     }else {
+            //         m_chassis.set(0, 0);
+            //     }
+            // }
+
+
+            double r = m_controller.getY(Hand.kRight);
+            double l = m_controller.getY(Hand.kLeft);
+
+            m_chassis.set(l, r);
         }
     }
 

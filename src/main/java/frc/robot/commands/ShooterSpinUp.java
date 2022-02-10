@@ -47,10 +47,16 @@ public class ShooterSpinUp extends CommandBase {
     }
     @Override
     public void initialize() {
-        System.out.println("hi");
+        System.out.println(this.m_shooter.m_pidController.getD());
+        System.out.println(this.m_shooter.m_pidController.getP());
+        System.out.println(this.m_shooter.m_pidController.getI());
+        System.out.println(this.m_shooter.m_pidController.getFF());
+
+        System.out.println("INIT");
         // this.m_shooter.setPID(SmartDashboard.getNumber(Constants.Shooter.SmartDashboard.ShooterSetpoint, 0));
-        this.m_shooter.setPID(calculateSpeed());
+        this.m_shooter.setPID(5600);
         // this.m_shooter.setManual(1);
+        System.out.println("SETTED");
     }
 
     @Override
@@ -60,6 +66,7 @@ public class ShooterSpinUp extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        System.out.println("ended");
         // this.m_shooter.setPID(0);
         this.m_shooter.setManual(0);
     }

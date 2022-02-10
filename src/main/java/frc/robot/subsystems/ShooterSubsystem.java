@@ -18,7 +18,7 @@ public class ShooterSubsystem extends SubsystemBase {
     // Motor controllers.
     private final CANSparkMax m_shooterMaster = new CANSparkMax(Shooter.kShooterMaster, MotorType.kBrushless);
     private final CANSparkMax m_shooterSlave = new CANSparkMax(Shooter.kShooterSlave, MotorType.kBrushless);
-    private final CANPIDController m_pidController; // Master PID controller.
+    public final CANPIDController m_pidController; // Master PID controller.
     private final CANEncoder m_encoder; // Master encoder.
 
     /**

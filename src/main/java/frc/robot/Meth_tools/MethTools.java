@@ -40,7 +40,6 @@ public final class MethTools{
         double stright_line_distance = distance * Math.cos(rads);
         double hight = distance * Math.cos(rads)-0.54;
         double speed = 60*Math.sqrt((9.8*Math.pow(stright_line_distance,2))/(Math.sin(2*rads)*stright_line_distance - 2*Math.pow(Math.cos(rads),2)*hight)) / (Math.PI*2*0.14);
-        System.out.println(speed);
 
         return speed;
     }
